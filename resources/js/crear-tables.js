@@ -250,19 +250,19 @@ function create_table(){
 	return null;
 }
 
-function create_table_rp(){
+function create_table_rt(){
 
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Nombre Producto", "Cantidad Dispon.", "Ganancia C/U", "Precio Entrada", "Accion"];
+	var name_cel = ["Moneda", "Moneda/USDT", "USDT Requeridos", "VES/USDT", "Total VES", "Requeridos (Moneda)", "Ganancia"];
 	//----------------------------------------------------------------
 
-	var sect_table = document.getElementById("sect_rp");
+	var sect_table = document.getElementById("sect_rt");
 
 	sect_table.innerHTML = "";
 
 	var tabla = document.createElement("table");
-	tabla.setAttribute("id", "table_rp");
+	tabla.setAttribute("id", "table_rt");
 
 	// Creamos un elemento <table> y un elemento <tbody>
 	var tblBody = document.createElement("tbody");
@@ -272,11 +272,11 @@ function create_table_rp(){
 		// Creamos las hileras de la tabla
 		var fila = document.createElement("tr");
 
-		fila.setAttribute("id", "filarp"+j);
+		fila.setAttribute("id", "filart"+j);
 
 		var multiplo = (j*table_col);
 		save_id_filas[j] = j+multiplo;
-		for (var i = 0; i < 5; i++) {
+		for (var i = 0; i < 7; i++) {
 
 			var celda_id = j+""+i;
 			
@@ -284,12 +284,11 @@ function create_table_rp(){
 			if(j==0){
 				var celda = document.createElement("td");
 
-				celda.setAttribute("id", "celdrp"+celda_id)
+				celda.setAttribute("id", "celdrt"+celda_id)
 				celda.setAttribute("class","celda_style_td");
 
-				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
-				input.setAttribute("id", "inputrp"+celda_id);
+				input.setAttribute("id", "inputrt"+celda_id);
 				input.setAttribute("type", "number");
 				var tex_mask = document.createElement("input");
 				input.setAttribute(edit_mode?"readwrite":"readonly", "");
@@ -314,7 +313,7 @@ function create_table_rp(){
 
 				var celda = document.createElement("td");
 
-				celda.setAttribute("id", "celdrp"+celda_id)
+				celda.setAttribute("id", "celdrt"+celda_id)
 
 				
 
@@ -327,11 +326,10 @@ function create_table_rp(){
 				tex_mask.setAttribute("class", "input_style_edicion_td");
 				tex_mask.setAttribute("placeholder", "Ingrese Valor");
 
-				input.setAttribute("id", "inputrp"+celda_id);
-				input.setAttribute("placeholder", "Ingrese Valor");
+				input.setAttribute("id", "inputrt"+celda_id);
 
 				//Cuadros de solo textos
-				if (i==0 || i ==1){
+				/*if (i==1 ){
 					input.setAttribute("class","input_style_td");
 					//input.setAttribute("onclick","get_celda_value_test();");
 					//input.setAttribute("onkeyup","get_celda_value_test();");
@@ -342,13 +340,16 @@ function create_table_rp(){
 					input.setAttribute("type", "text");
 					celda.appendChild(input);
 					input.setAttribute("onFocus", "ocultar_input();");
-				}
+				}*/
 				//Cuadros de entrada numerica
-				if(i==2 || i==3){
+				if(i==0 || i==1 || i==3 ){
+
 					input.setAttribute("class","input_style_td");
-					input.setAttribute("onclick","get_celda_value_rp();");
-					input.setAttribute("onkeyup","get_celda_value_rp();");
-					input.setAttribute("onchange","get_celda_value_rp();");
+					input.setAttribute("placeholder", "Ingrese Valor");
+
+					input.setAttribute("onclick","get_trans_datos();");
+					input.setAttribute("onkeyup","get_trans_datos();");
+					input.setAttribute("onchange","get_trans_datos();");
 					//input.setAttribute("onchange","enviar_index();");
 
 					input.setAttribute("class","input_style_hidden");
@@ -358,7 +359,7 @@ function create_table_rp(){
 					input.setAttribute("lang", "en");
 
 					//para la mask del cuadro
-					tex_mask.setAttribute("id", "text_maskrp"+celda_id);
+					tex_mask.setAttribute("id", "text_maskrt"+celda_id);
 					celda.appendChild(tex_mask);
 					celda.appendChild(input);
 
@@ -370,16 +371,23 @@ function create_table_rp(){
 					input.setAttribute("onFocus", "ocultar_input();");
 
 				}
-				if(i==4){
+				//Cuadros de texto no editables
+			 	else {
+					input.setAttribute("class","input_style_td");
+					input.setAttribute("type", "text");
+					input.setAttribute("disabled", "");	
+					celda.appendChild(input);			
+				}
+				/*if(i==4){
 					celda.setAttribute("class", "button_style_r");
 					var button = document.createElement("button");
 					button.setAttribute("class", "mask_style");
 					button.setAttribute("type", "button");
 					button.innerHTML= "Registrar";
 					button.setAttribute("onclick","guardar_rp();");
-					button.setAttribute("id", "buttrp"+j);
+					button.setAttribute("id", "buttrt"+j);
 					celda.appendChild(button);
-				}
+				}*/
 				fila.appendChild(celda);
 			}
 		}

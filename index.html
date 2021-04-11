@@ -2,7 +2,7 @@
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
-		<title>Proyecto TYT</title>
+		<title>Tu Cambio Vzla.</title>
 
 		<link rel="icon" href="resources/img/icono.png" type="image/png"sizes="50x50">
 		<! Aquí definimos los Scrit js para esta página -->
@@ -18,10 +18,7 @@
 		<script src="resources/js/lista-productos.js"></script>
 		<script src="resources/js/historial.js"></script>
 
-		<script type="text/javascript" src="https://unpkg.com/xlsx@0.14.1/dist/xlsx.full.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.1.0/papaparse.min.js"></script>
-
-
+		<script src="resources/js/panel-transaccion.js"></script>
 
 		<! Fin del js -->
 		<! Aquí definimos los estilo CSS para esta página -->
@@ -36,193 +33,75 @@
 	<body onLoad="init();" >
 		<section class="label_style">
 
-			<h1 class="mask_style">Experimento de Lista de negocios en HTML</h1>
-
-			<div class="">
-			<img class="logo_style" src="resources/img/logo.png"> </div>
+			<h1 class="mask_style">Proyecto Monedas</h1>
 
 			<div class="cajas_style">
 				<button class="mask_style" type="button" id="butopt1" onclick="visible_element(1);">
-				Registro de Ventas
+				Registro de Transacciones
 			</div>
 			<div class="cajas_style">
 				<button class="mask_style" type="button" id="butopt2" onclick="visible_element(2);">
-				Registro de Productos
+				Conversion Moneda
 			</div>
 			<div class="cajas_style">
 				<button class="mask_style" type="button" id="butopt3" onclick="visible_element(3);">
-				Historial de Ventas
-			</div>
-			<div class="cajas_style" >
-				<button class="mask_style" type="button" id="butopt4" onclick="visible_element(4);">
-				Lista de Productos
-			</div>
-			<div class="cajas_style">
-				<button class="mask_style" type="button" id="butopt5" onclick="visible_element(5);">
-				Importar Lista
+				Historial de Transacciones
 			</div>
 		</section>
 
-		<! ---------------- Seccion1 Registro de ventas ------------------>
+		<! ---------------- Seccion1 Registro de Transacciones ------------------>
 
 		<section class="label_style" id="seccion1">
-			<div class="cajas_style">Seleccione las lista: 
-				<select class="mask_style" id="selcregvent" onchange = "select_base_list('selcregvent');"></select>
+			<div class="cajas_style">Seleccione Moneda: 
+				<select class="mask_style" id="selc_monert" onchange = "">
+					<option id="money0" value="0">COP</option>
+					<option id="money1" value="1">ARS</option>
+				</select>
 			</div>
-			<div class="cajas_style">Buscara productos: 
-				<input class="mask_style" type="search" id="buscar_rv" placeholder="Ingrese Nombre de Producto" list="listproducts" onfocus="el_selec('buscar_rv');">
-			</div>
-			<div class="cajas_style">Precio Dolar: 
-				<input class="mask_style" type="text" id="dolar_rv" readonly>
-			</div>
-			<table class="table_style" id="tablerv">
-				<tbody>
-					<tr class="button_style_x" id="frvila10">
-						<td class="celda_style_name" id="rvceldacol00" >
-							<input class="input_style_td" type="text" value="Nombre Producto" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol01">
-							<input class="input_style_td" type="text" value="Cantidad Disponible" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol02">
-							<input class="input_style_td" type="text" value="Precio Dolar" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol03">
-							<input class="input_style_td" type="text" value="Precio BsF" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol04">
-							<input class="input_style_td" type="text" value="Cant. Venta" readonly>
-						</td>
-						<td class="celda_style_name" id="rvceldacol05">
-							<input class="input_style_td" type="text" value="Accion" readonly>
-						</td>
 
-					</tr>
-					<tr class="fila_style" id="frvila11">
-						<td class="celda_style" id="rvcelda0100">
-							<input class="input_style_td" type="text" id="rvinput0100" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0101">
-							<input class="input_style_td" type="text" id="rvinput0101" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0102">
-							<input class="input_style_td" type="text" id="rvinput0102" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0103">
-							<input class="input_style_td" type="text" id="rvinput0103" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0104">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0104" value="1"  onfocus="el_selec('rvinput0104');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0105">
-							<button class="mask_style" type="button" id="buttrv05" onclick="button_reg_venta(0);">Registrar</button>
-						</td>
-					</tr>
-					<tr class="fila_style" id="frvila12">
-						<td class="celda_style" id="rvcelda0110">
-							<input class="input_style_td" type="text" id="rvinput0110" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0111">
-							<input class="input_style_td" type="text" id="rvinput0111" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0112">
-							<input class="input_style_td" type="text" id="rvinput0112" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0113">
-							<input class="input_style_td" type="text" id="rvinput0113" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0114">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0114" value="1" onfocus="el_selec('rvinput0114');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0115">
-							<button class="mask_style" type="button" id="buttrv15" onclick="button_reg_venta(1);">Registrar</button>
-						</td>
-					</tr>
-					<tr class="fila_style" id="frvila13">
-						<td class="celda_style" id="rvcelda0120">
-							<input class="input_style_td" type="text" id="rvinput0120" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0121">
-							<input class="input_style_td" type="text" id="rvinput0121" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0122">
-							<input class="input_style_td" type="text" id="rvinput0122" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0123">
-							<input class="input_style_td" type="text" id="rvinput0123" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0124">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0124" value="1" onfocus="el_selec('rvinput0124');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0125">
-							<button class="mask_style" type="button" id="buttrv25" onclick="button_reg_venta(2);">Registrar</button>
-						</td>
-					</tr>
-					<tr class="fila_style" id="frvila14">
-						<td class="celda_style" id="rvcelda0130">
-							<input class="input_style_td" type="text" id="rvinput0130" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0131">
-							<input class="input_style_td" type="text" id="rvinput0131" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0132">
-							<input class="input_style_td" type="text" id="rvinput0132" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0133">
-							<input class="input_style_td" type="text" id="rvinput0133" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0134">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0134" value="1" onfocus="el_selec('rvinput0134');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0135">
-							<button class="mask_style" type="button" id="buttrv35" onclick="button_reg_venta(3);">Registrar</button>
-						</td>
-					</tr>
-					<tr class="fila_style" id="frvila15">
-						<td class="celda_style" id="rvcelda0140">
-							<input class="input_style_td" type="text" id="rvinput0140" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0141">
-							<input class="input_style_td" type="text" id="rvinput0141" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0142">
-							<input class="input_style_td" type="text" id="rvinput0142" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0143">
-							<input class="input_style_td" type="text" id="rvinput0143" value="" disabled>
-						</td>
-						<td class="celda_style" id="rvcelda0144">
-							<input class="input_style_visible" type="number" min="1" id="rvinput0144" value="1" onfocus="el_selec('rvinput0144');" >
-						</td>
-						<td class="button_style_r" id="rvcelda0145">
-							<button class="mask_style" type="button" id="buttrv45" onclick="button_reg_venta(4);">Registrar</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<div class="cajas_style">Total en Dolar: <input class="mask_style" type="text" id="rv_totaldol" value="0,00 $" readonly></div>
-			<div class="cajas_style">Total en Bsf: <input class="mask_style" type="text" id="rv_totalbsf" value="0,00 BsF" readonly></div>
-			<div class="cajas_style">Nombre Cliente: <input class="mask_style" type="text" id="rv_clnombre" placeholder="Ingrese Nombre de Cliente" list="list_datacl"></div>
-			<div class="cajas_style">Pendiente:  <input class="" input type="checkbox" id="pend_mark"></div>
-			<div class="cajas_style"><button class="mask_style" type="button" id="buttrvtotal" onclick="guardar_venta();">Registrar Venta</button></div>
+			<div class="cajas_style">
+
+			</div>
+			<div class="cajas_style">
+				Tasa (Moneda Seleccionada): 
+				<input class="mask_style" type="number" id="tasa_rt">
+				Total Diario (Moneda Seleccionada): 
+				<input class="mask_style" type="text" id="total_rt">
+			</div>
+
+			<section id="sect_rt"></section>
+
+			<div class="cajas_style"><button class="mask_style" type="button" id="butt_regrt" onclick="guardar_trans_datos();">Registrar</button></div>
 
 
 			<section class="label_style" id="registroactual"></section>
 		</section>
-		<! ------- Seccion2 Registro de Productos ------------- >
+		<! ------- Seccion2 Conversiones moneda ------------- >
 		<section class="label_style" id="seccion2">
-			<div class="cajas_style">Seleccione las lista: 
-				<select class="mask_style" id="selcregprod" onchange = "select_base_list('selcregprod');"></select>
+
+			<div class="cajas_style">
+				<label for="sel_conver">Covertir: </label>
+				<select class="mask_style" id="sel_conver" onchange = "resultado_conver();" >
+					<option id="conv0" value="0">Pesos a BsF</option>
+					<option id="conv1" value="1">Bsf a Pesos</option>
+
+				</select>
 			</div>
-			<section class="label_style" id="sect_rp"></section>
+			<div class="cajas_style">Tasa de Cambio: <input class="mask_style" type="number" oninput="resultado_conver();" id="rt_tasa" min="0.01" step="0,00001" value="0"></div>
+			<div class="cajas_style">
+				Ingrese Monto: <input class="mask_style" type="number" oninput="resultado_conver();" id="rt_input_a" min="0,11" step="1" value="0,00">
+				Resultado: <input class="mask_style" type="text" id="rt_input_b" value="0,00" readonly>
+			</div>
+			<datalist id="list_pesos"></datalist>
+			<datalist id="list_bsf"></datalist>
 		</section>
 
-		<! ------- Seccion3 Historial de ventas ------------- >
+		<! ------- Seccion3 Historial de Transacciones ------------- >
 		<section class="label_style" id="seccion3">
 			<div class="cajas_style">Seleccione Fecha: 
 				<select class="mask_style" id="selchisfec"></select>
 			</div>
-			<section class="label_style" id="historialventa"></section>
+			<section class="label_style" id="hist_trans"></section>
 			<datalist id="list_datacl"></datalist>
 		</section>
 

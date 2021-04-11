@@ -51,7 +51,7 @@ function clonar_filtros(id) {
 
 function visible_element(opt) {
 
-	for(var j = 1; j<6;j++){
+	for(var j = 1; j<4;j++){
 		var bot_temp = document.getElementById("butopt"+j);
 		bot_temp.setAttribute("class","mask_style");
 		

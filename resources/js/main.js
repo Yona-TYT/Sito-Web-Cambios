@@ -34,71 +34,54 @@ var start_one = true;
 var is_start = true;
 function load_save_data(){
 
-	//console.log(gl_list[gl_selc].cantidad[3])
-	table_fila = gl_list[gl_selc].listatamaño;
+	var tasa = gl_trasn_datos.sel_tasa[gl_selmon];
+	var simbd = gl_trasn_datos.sel_simbd[gl_selmon];
+	var simbi = gl_trasn_datos.sel_simbi[gl_selmon];
+	var input = document.getElementById("tasa_rt");
+	input.value = tasa;
 
-	//Comprueba y activa/desactiva el modo editor
-	check_edit_mode();
-
-	//Crea la tabla de lista productos
-	create_table();
-
-	//Crea la tabla de Registro de productos
-	create_table_rp();
-
-	//crea la lista de productos
-	crear_lista_productos();
+	//Obtenemos los inputs ESCRITURA ---------------------------------------
+	var input_a = document.getElementById("inputrt10");
+	var input_b = document.getElementById("inputrt11");
+	var input_d = document.getElementById("inputrt13");
 
 
-	var r_margen = gl_listname.genmargen;
-	var r_precio = gl_listname.genprecio;
+	//Obtenemos los inputs SOLO LECTURA --------------------------------------
+	var input_c = document.getElementById("inputrt12");
+	var input_e = document.getElementById("inputrt14"); 
+	var input_f = document.getElementById("inputrt15");
+	var input_g = document.getElementById("inputrt16");
 
-	var precio = document.getElementById("input02");
-	var margen = document.getElementById("input04");
-	var precio_mask = document.getElementById("text_mask02");
-	var margen_mask = document.getElementById("text_mask04");
+	//Recupera los datos guardados
+	var moneda = gl_trasn_datos.moneda[gl_selmon]?gl_trasn_datos.moneda[gl_selmon]:0;
+	var mon_ustd = gl_trasn_datos.mon_ustd[gl_selmon]?gl_trasn_datos.mon_ustd[gl_selmon]:0;
+	var mon_ustdve = gl_trasn_datos.mon_ustdve[gl_selmon]?gl_trasn_datos.mon_ustdve[gl_selmon]:0;
 
-	margen.value = r_margen;
-	margen_mask.value = get_mask_simple(r_margen,"%");
-	precio.value = r_precio;
-	precio_mask.value = get_mask(r_precio,"BsF");
+	input_a.value = moneda;
+	input_b.value = mon_ustd;
+	input_d.value = mon_ustdve;
 
-	var rv_dolar = document.getElementById("dolar_rv");
-	rv_dolar.value = get_mask(r_precio,"BsF");
+	//Calculos de datos--------------------------------------
+	var total_ves = moneda/tasa; //Total VES
+	var usdt_req = total_ves/mon_ustdve; //USDT requeridos
+	var mon_req = mon_ustd*usdt_req //Requeridos (Moneda)
+	var ganancia = moneda-mon_req //Ganancia
 
-	if(gl_current_selec != null){	
-		var r_nombre = gl_list[gl_selc].nombre[gl_current_selec]?gl_list[gl_selc].nombre[gl_current_selec]:"";
-		var r_cantidad = gl_list[gl_selc].cantidad[gl_current_selec]?gl_list[gl_selc].cantidad[gl_current_selec]:"";
-		var r_margen = gl_list[gl_selc].margen[gl_current_selec]?gl_list[gl_selc].margen[gl_current_selec]:0;
-		var r_precio = gl_list[gl_selc].precio[gl_current_selec]?gl_list[gl_selc].precio[gl_current_selec]:0;
+	input_c.value = get_mask("", usdt_req, "(USDT)");
+	input_e.value = get_mask("", total_ves, "VES");
+	input_f.value = get_mask(simbi, mon_req, "");
+	input_g.value = get_mask(simbi, ganancia, "");
 
-		var nombre = document.getElementById("input21");
-		var cantidad = document.getElementById("input22");
-		var margen = document.getElementById("input25");
-		var precio = document.getElementById("input26");
-		var margen_mask = document.getElementById("text_mask25");
-		var precio_mask = document.getElementById("text_mask26");
-		
-		nombre.value = r_nombre.toLowerCase();
-		cantidad.value = r_cantidad;
-		margen.value = r_margen;
-		margen_mask.value = get_mask_simple(r_margen,"%");
-		precio.value = r_precio;
-		precio_mask.value = get_mask(r_precio,"$");
-	}
+	//Obtenemos los inputs LECTURA DE MASK MONEDA
+	var mask_a = document.getElementById("text_maskrt10");
+	var mask_b = document.getElementById("text_maskrt11");
+	var mask_d = document.getElementById("text_maskrt13");
+	var mask_g = document.getElementById("text_maskrt16");
 
-	if(is_start){
-		menu_main();
-		is_start=false;
-	}
-	//cambio_valor();
+	mask_a.value = get_mask(simbi, input_a.value, "("+simbd+")");
+	mask_b.value = get_mask("", input_b.value, "("+simbd+"/USDT)");
+	mask_d.value = get_mask("", input_d.value, "(VES/USDT)");
 
-	//console.log(gl_list[gl_selc].precio[4]);
-	start_one = false;
-
-	
-	buscar_lista_rv("buscar_rv");
-	
 }
 
 function add_message(text)
@@ -219,7 +202,8 @@ function init(){
 	//get_celda_value(table_fila,table_col);
 
 	//Para cambiar entre listas
-	select_list_x();
+	//select_list_x();
+	set_basededatos("basededato");
 
 	//Leer documentos tipo hojas de datos
 	importar_datos();
@@ -236,16 +220,19 @@ function init(){
 
 
 	//Comprueba y activa/desactiva el modo editor
-	check_edit_mode();
+	//check_edit_mode();
 
 	//Crea la tabla de lista productos
-	create_table();
+	//create_table();
 
 	//Crea la tabla de Registro de productos
-	create_table_rp();
+	//create_table_rp();
+
+	int_trans();
+	preloder_filtro_fec();
 
 	//crea la lista de productos
-	crear_lista_productos();
+	//crear_lista_productos();
 
 
 	var boton = document.getElementById("load_start");
@@ -257,8 +244,8 @@ function init(){
 	input_buscar.addEventListener("input", function(){buscar_lista(input_buscar.value);});
 
 	//Buscador para el registro de ventas
-	var input_buscar_rv = document.getElementById("buscar_rv");
-	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});
+	/*var input_buscar_rv = document.getElementById("buscar_rv");
+	input_buscar_rv.addEventListener("input", function(){buscar_lista_rv("buscar_rv");});*/
 }
 //window.addEventListener("load", click_test);
 //window.addEventListener("keypress", is_enter_press);

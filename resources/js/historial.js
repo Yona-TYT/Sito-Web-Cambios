@@ -1,9 +1,9 @@
 function preloder_filtro_fec() {
 	var selec = document.getElementById("selchisfec");
-	var indexfec = gl_lista_ventas.indexfec;
+	var indexfec = gl_trasn_save.indexfec;
 	var selc_tx = "";
 	for (var j = indexfec;  j >= 0; j--) {
-		var fechalist = gl_lista_ventas.fechalist[j];
+		var fechalist = gl_trasn_save.fechalist[j];
 		selc_tx += "<option id='fech"+j+"' value='"+j+"'>"+fechalist+"</option>";
 	}
 	selec.innerHTML = selc_tx;
@@ -12,51 +12,65 @@ function preloder_filtro_fec() {
 }
 
 function selec_fechas(id) {
-	var secc_his = document.getElementById("historialventa");
+
+	var secc_his = document.getElementById("hist_trans");
 	secc_his.innerHTML ="";
 	var selec = document.getElementById(id);
 	var current_opt = selec.options[selec.selectedIndex];
 	//console.log(current_opt.value);
-	//var count = gl_lista_ventas.countfec[current_opt.value];
+	//var count = gl_trasn_save.countfec[current_opt.value];
 	if(current_opt){
-		var start = gl_lista_ventas.indexstart[current_opt.value];
-		var end = gl_lista_ventas.indexend[current_opt.value];
+		var start = gl_trasn_save.indexstart[current_opt.value];
+		var end = gl_trasn_save.indexend[current_opt.value];
 
 		for (var j = start; start != null && j < (end+1); j++) {
-			//var index = gl_lista_ventas.savindex[j];
+			//var index = gl_trasn_save.savindex[j];
 			crear_historial(j);
 		}
 	}
 }
 
 function crear_historial(index) {
-	var detalles = gl_lista_ventas.detalles[index];
-	var prdol = gl_lista_ventas.totaldol[index];
-	var prbsf = gl_lista_ventas.totalbsf[index];
-	var hora = gl_lista_ventas.hora[index];
-	var fecha = gl_lista_ventas.fecha[index];
-	var estado = gl_lista_ventas.estado[index];
 
-	var cl = gl_lista_ventas.cliente[index];
+	var hora = gl_trasn_save.hora[index];
+	var fecha = gl_trasn_save.fecha[index];
 
-	var est_txa = "<strong id='txesta"+index+"'> Estado: "+estado+"</strong>";
-	var est_txb = "<strong id='txestb"+index+"'> Estado: "+estado+"</strong>";
+	var simbd = gl_trasn_save.simbd[index];
+	var simbi = gl_trasn_save.simbi[index];
 
-	var secc_his = document.getElementById("historialventa");
-	var titulo = "["+cl+", "+est_txa+ "], compra de: ("+get_mask(prdol,"$")+" / "+get_mask(prbsf,"Bsf")+") Fecha:("+fecha+") Hora:("+hora+") ";
+	var tasa = gl_trasn_save.tasa[index];
+	var moneda = gl_trasn_save.moneda[index];
+	var mon_ustd = gl_trasn_save.mon_ustd[index];
+	var mon_ustdve = gl_trasn_save.mon_ustdve[index];
+
+	var total_ves = gl_trasn_save.total_ves[index];
+	var usdt_req = gl_trasn_save.usdt_req[index];
+	var mon_req = gl_trasn_save.mon_req[index];
+	var ganancia = gl_trasn_save.ganancia[index];
+
+	var tx_tasa = "<li>Tasa: "+tasa+"</li>";
+	var tx_a = "<li>"+simbd+" Recibidos: "+moneda+"</li>";
+	var tx_b = "<li>"+simbd+"/USTD : "+mon_ustd+"</li>";
+	var tx_c = "<li>USTD Requeridos : "+usdt_req+"</li>";
+	var tx_d = "<li>VES/USTD : "+mon_ustdve+"</li>";
+	var tx_e = "<li>Total VES : "+total_ves+"</li>";
+	var tx_f = "<li>"+simbd+" Requeridos: "+mon_req+"</li>";
+	var tx_g = "<li>Ganancia : "+ganancia+"</li>";
+
+
+
+	var titulo =  "Transaccion de: ("+get_mask(simbi,moneda,"("+simbd+")")+" / "+get_mask("", total_ves, "VES")+") Fecha:("+fecha+") Hora:("+hora+") ";
 
 	var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
 
 
-	var buttq = "";
-	if(estado=="Aprobada")
-		buttq = "<button id='bott_reint"+index+"' type='button' onclick='button_reint_hist("+index+");'>Reintegrar</button>";
-	else if(estado=="Pendiente")
-		buttq = "<button id='bott_pend"+index+"' type='button' onclick='button_pend_hist("+index+");'>Confirmar</button>";
+	//var	buttq = "<button id='bott_reint"+index+"' type='button' onclick='button_reint_hist("+index+");'>Reintegrar</button>";
+	var	buttq = "";
 
-	var inside = "<div class='element_style_hidden' id='divhis"+index+"'>"+ detalles + buttq + est_txb +"</div>";
+	var inside = "<div class='element_style_hidden' id='divhis"+index+"'>"+ tx_tasa + tx_a + tx_b + tx_c + tx_d + tx_e + tx_f + tx_g + buttq  +"</div>";
 
 
+	var secc_his = document.getElementById("hist_trans");
 	secc_his.innerHTML +=  "<div class='div_list_style'>" + buttm  + titulo + inside + "</div>";
 }
 function crear_lista_cl() {
@@ -66,7 +80,7 @@ function crear_lista_cl() {
 	data_lista.innerHTML = "";
 	var lista_tx = "";
 	var data_tx = "";
-	for (var j = 0; j < gl_lista_ventas.nombrecl.length; j++) {
+	for (var j = 0; j < gl_trasn_save.nombrecl.length; j++) {
 		//lista_tx += add_text_cl(j,1);
 		data_tx += add_text_cl(j,2);
 	}
@@ -76,7 +90,7 @@ function crear_lista_cl() {
 }
 
 function add_text_cl(index,opt){
-	var nombre = gl_lista_ventas.nombrecl[index]?gl_lista_ventas.nombrecl[index]:"";
+	var nombre = gl_trasn_save.nombrecl[index]?gl_trasn_save.nombrecl[index]:"";
 
 	if(opt==1){
 		return "<div> </div>";
@@ -96,15 +110,15 @@ function button_detalles(index) {
 
 function button_reint_hist(index) {
 	var etd = "Reintegrada";
-	if(gl_lista_ventas.estado[index]=="Aprobada"){
+	if(gl_trasn_save.estado[index]=="Aprobada"){
 		//console.log(index);
 		var bott = document.getElementById("bott_reint"+index);
 		bott.setAttribute("class", "element_style_hidden");
 
-		var listindex = gl_lista_ventas.pdtindex[index];
-		var listclave = gl_lista_ventas.pdtclave[index];
-		var listcantidad = gl_lista_ventas.pdtcantidad[index];
-		var listdesc = gl_lista_ventas.pdtdesc[index];
+		var listindex = gl_trasn_save.pdtindex[index];
+		var listclave = gl_trasn_save.pdtclave[index];
+		var listcantidad = gl_trasn_save.pdtcantidad[index];
+		var listdesc = gl_trasn_save.pdtdesc[index];
 		for (var j = 0; j < listindex.length ; j++) {
 			var nr_a = parseFloat(listdesc[j]);
 
@@ -116,7 +130,7 @@ function button_reint_hist(index) {
 			agregarobjeto(gl_list[clave], clave, 1);//1 es para lectura y escritra
 		}
 
-		gl_lista_ventas.estado[index] = etd;
+		gl_trasn_save.estado[index] = etd;
 
 		//console.log("index"+" "+index);
 		var txesta = document.getElementById("txesta"+index);
@@ -126,7 +140,7 @@ function button_reint_hist(index) {
 		txesta.innerHTML = " Estado: "+etd;
 		txestb.innerHTML = " Estado: "+etd;
 
-		agregarventas(gl_lista_ventas);
+		agregarventas(gl_trasn_save);
 		
 
 		start_one = true;
@@ -137,7 +151,7 @@ function button_reint_hist(index) {
 function button_pend_hist(index) {
 	var etd = "Aprobada";
 
-	gl_lista_ventas.estado[index] = etd;
+	gl_trasn_save.estado[index] = etd;
 
 	var txesta = document.getElementById("txesta"+index);
 	var txestb = document.getElementById("txestb"+index);
@@ -146,7 +160,7 @@ function button_pend_hist(index) {
 	txesta.innerHTML = " Estado: "+etd;
 	txestb.innerHTML = " Estado: "+etd;
 
-	agregarventas(gl_lista_ventas);
+	agregarventas(gl_trasn_save);
 	
 	start_one = true;
 	mostrar_lista(gl_selc);

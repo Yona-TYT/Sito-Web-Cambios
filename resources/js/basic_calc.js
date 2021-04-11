@@ -24,7 +24,7 @@ function calc_bolivarprecio(bolivares, dolar)
 	return calc;
 }
 
-function addCommas(nStr,simb = false){
+function addCommas(nStr,simbd,simbi){
 		
 		nStr += '';
 		x = nStr.split('.');
@@ -34,15 +34,13 @@ function addCommas(nStr,simb = false){
 		while (rgx.test(x1)) {
 		   x1 = x1.replace(rgx, '$1' + ',' + '$2');
 		}
-		if(simb)
-			return x1 + x2 + " "+simb;
 
-		else return x1 + x2;
+		return simbi+" "+ x1 + x2 + " "+simbd;
 }
 
-function get_mask(numer,simb){
+function get_mask(simbi, numer,simbd){
 	numer = parseFloat(numer)? parseFloat(numer).toFixed(2) : parseFloat(0).toFixed(2);
-	return addCommas(numer,simb);
+	return addCommas(numer,simbd,simbi);
 }
 
 function get_mask_simple(numer,simb){
@@ -62,32 +60,3 @@ function get_fila_nr(num, tabble_siz, i){
 		return resusl;
 }
 
-function Queue() {
-
-    this.dataStore = Array.prototype.slice.call(arguments, 0);
-    this.enqueue = enqueue;
-    this.dequeue = dequeue;
-    this.empty = empty;
-
-    this.print = print;
-
-    function enqueue(element) {
-        this.dataStore.push(element);
-    }
-
-    function dequeue() {
-        return this.dataStore.shift();
-    }
-
-    function empty() {
-        return this.dataStore = [];
-    }
-
-    function print(element) {
-        this.dataStore.forEach(function (item) {
-            // element.appendChild(item.node);
-            console.log(item);
-			return(item);
-        });
-    }
-}
