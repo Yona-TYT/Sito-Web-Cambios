@@ -114,8 +114,8 @@ function click_test(){
 	//gloval_test ="";
 
 	//get_celda_value(table_fila,table_col);
-var gl_lista_ventas = new all_ventas();
-		agregarventas(gl_lista_ventas);
+var gl_trasn_save = new all_ventas();
+		agregarventas(gl_trasn_save);
 
 }
 

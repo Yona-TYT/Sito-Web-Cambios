@@ -85,15 +85,15 @@ function obtener_datos(evento) {
 
 			if(!fechalist) {
 
-				gl_lista_ventas.indexstart[indexfec] = index;
-				gl_lista_ventas.fechalist[indexfec] = fecha;
+				gl_trasn_save.indexstart[indexfec] = index;
+				gl_trasn_save.fechalist[indexfec] = fecha;
 			}
 
 			else{
 				indexfec++
-				gl_lista_ventas.indexstart[indexfec] = index;
-				gl_lista_ventas.indexfec = indexfec;
-				gl_lista_ventas.fechalist[indexfec] = fecha;
+				gl_trasn_save.indexstart[indexfec] = index;
+				gl_trasn_save.indexfec = indexfec;
+				gl_trasn_save.fechalist[indexfec] = fecha;
 			}
 		}
 		preloder_filtro_fec();

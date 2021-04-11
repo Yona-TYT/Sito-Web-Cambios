@@ -183,7 +183,7 @@ function preloder_selec_list(id) {
 	var list_nam = gl_listname.list_nam;
 	var selc_tx = "";
 	for (var j = 0;  j < list_id.length; j++) {
-		var fechalist = gl_lista_ventas.fechalist[j];
+		var fechalist = gl_trasn_save.fechalist[j];
 		selc_tx += "<option id='selelist"+j+"' value='"+list_id[j]+"'>"+list_nam[j]+"</option>";
 	}
 
