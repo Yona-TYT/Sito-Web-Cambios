@@ -65,61 +65,25 @@ function visible_element(opt) {
 	var table_regvent = document.getElementById("seccion1");
 	var table_regpro = document.getElementById("seccion2");
 	var historial = document.getElementById("seccion3");
-	var table_list = document.getElementById("tablproductos");
-	var table_panel = document.getElementById("seccion4");
 	var table = document.getElementById("tableprev0");
-	var import_data = document.getElementById("seccion5");
 
-
-	//Registro de Ventas
+	//Registro de Transacciones
 	if(opt==1) {
-		table_list.setAttribute("class","element_style_hidden");
-		table_panel.setAttribute("class","element_style_hidden");
-		import_data.setAttribute("class","element_style_hidden");
 		historial.setAttribute("class","element_style_hidden");
 		table_regpro.setAttribute("class","element_style_hidden");
 		table_regvent.setAttribute("class","label_style");
-
 	}
-	//Registro de Productos
+	//Conversion moneda
 	if(opt==2) {
-		table_list.setAttribute("class","element_style_hidden");
-		table_panel.setAttribute("class","element_style_hidden");
-		import_data.setAttribute("class","element_style_hidden");
 		table_regvent.setAttribute("class","element_style_hidden");
 		historial.setAttribute("class","element_style_hidden");
 		table_regpro.setAttribute("class","label_style");
 	}
-	//Historial de Ventas
+	//Historial de Transacciones
 	if(opt==3) {
-		table_list.setAttribute("class","element_style_hidden");
-		table_panel.setAttribute("class","element_style_hidden");
-		import_data.setAttribute("class","element_style_hidden");
 		table_regvent.setAttribute("class","element_style_hidden");
 		table_regpro.setAttribute("class","element_style_hidden");
 		historial.setAttribute("class","label_style");
-
-	}
-	//Lista general de productos
-	if(opt==4) {
-		table_list.setAttribute("class","fila_style");
-		table_panel.setAttribute("class","label_style");
-		import_data.setAttribute("class","element_style_hidden");
-		table.setAttribute("class","element_style_hidden");
-		table_regvent.setAttribute("class","element_style_hidden");
-		historial.setAttribute("class","element_style_hidden");
-		table_regpro.setAttribute("class","element_style_hidden");
-
-	}
-	//Importar datos
-	if(opt==5) {
-		table_list.setAttribute("class","element_style_hidden");
-		table_panel.setAttribute("class","element_style_hidden");
-		table_regvent.setAttribute("class","element_style_hidden");
-		historial.setAttribute("class","element_style_hidden");
-		table_regpro.setAttribute("class","element_style_hidden");
-		import_data.setAttribute("class","label_style");
-		table.setAttribute("class","label_style");
 	}
 }
 

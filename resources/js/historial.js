@@ -1,3 +1,8 @@
+function int_history() {
+	preloder_filtro_fec();
+	preloder_selec_mon("selc_monert");
+}
+
 function preloder_filtro_fec() {
 	var selec = document.getElementById("selchisfec");
 	var indexfec = gl_trasn_save.indexfec;
@@ -11,6 +16,7 @@ function preloder_filtro_fec() {
 	//selec.setAttribute("onclick","selec_fechas('selchisfec');");
 }
 
+var gl_total_day = 0;
 function selec_fechas(id) {
 
 	var secc_his = document.getElementById("hist_trans");
@@ -19,18 +25,29 @@ function selec_fechas(id) {
 	var current_opt = selec.options[selec.selectedIndex];
 	//console.log(current_opt.value);
 	//var count = gl_trasn_save.countfec[current_opt.value];
+	gl_total_day = 0;
 	if(current_opt){
 		var start = gl_trasn_save.indexstart[current_opt.value];
 		var end = gl_trasn_save.indexend[current_opt.value];
 
 		for (var j = start; start != null && j < (end+1); j++) {
 			//var index = gl_trasn_save.savindex[j];
-			crear_historial(j);
+			gl_total_day += crear_historial(j);
 		}
 	}
+
+	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
+	var result = get_mask("",gl_total_day,"("+selc_simb+")");
+	var in_hist = document.getElementById("total_hist");
+	in_hist.value = result;
+	var in_rtran = document.getElementById("total_rt");
+	in_rtran.value = result;
+	
 }
 
 function crear_historial(index) {
+
+	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
 
 	var hora = gl_trasn_save.hora[index];
 	var fecha = gl_trasn_save.fecha[index];
@@ -48,30 +65,34 @@ function crear_historial(index) {
 	var mon_req = gl_trasn_save.mon_req[index];
 	var ganancia = gl_trasn_save.ganancia[index];
 
-	var tx_tasa = "<li>Tasa: "+tasa+"</li>";
-	var tx_a = "<li>"+simbd+" Recibidos: "+moneda+"</li>";
-	var tx_b = "<li>"+simbd+"/USTD : "+mon_ustd+"</li>";
-	var tx_c = "<li>USTD Requeridos : "+usdt_req+"</li>";
-	var tx_d = "<li>VES/USTD : "+mon_ustdve+"</li>";
-	var tx_e = "<li>Total VES : "+total_ves+"</li>";
-	var tx_f = "<li>"+simbd+" Requeridos: "+mon_req+"</li>";
-	var tx_g = "<li>Ganancia : "+ganancia+"</li>";
+	if(selc_simb==simbd){
+		var tx_tasa = "<li>Tasa: "+tasa+"</li>";
+		var tx_a = "<li>"+simbd+" Recibidos: "+get_mask("",moneda,"")+"</li>";
+		var tx_b = "<li>"+simbd+"/USTD : "+get_mask("",mon_ustd,"")+"</li>";
+		var tx_c = "<li>USTD Requeridos : "+get_mask("",usdt_req,"")+"</li>";
+		var tx_d = "<li>VES/USTD : "+get_mask("",mon_ustdve,"")+"</li>";
+		var tx_e = "<li>Total VES : "+get_mask("",total_ves,"")+"</li>";
+		var tx_f = "<li>"+simbd+" Requeridos: "+get_mask("",mon_req,"")+"</li>";
+		var tx_g = "<li>Ganancia : "+get_mask("",ganancia,"")+"</li>";
+
+		var titulo =  "Transaccion de: ("+get_mask(simbi,moneda,"("+simbd+")")+" / "+get_mask("", total_ves, "VES")+") Fecha:("+fecha+") Hora:("+hora+") ";
+
+		var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
 
 
+		//var	buttq = "<button id='bott_reint"+index+"' type='button' onclick='button_reint_hist("+index+");'>Reintegrar</button>";
+		var	buttq = "";
 
-	var titulo =  "Transaccion de: ("+get_mask(simbi,moneda,"("+simbd+")")+" / "+get_mask("", total_ves, "VES")+") Fecha:("+fecha+") Hora:("+hora+") ";
-
-	var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
-
-
-	//var	buttq = "<button id='bott_reint"+index+"' type='button' onclick='button_reint_hist("+index+");'>Reintegrar</button>";
-	var	buttq = "";
-
-	var inside = "<div class='element_style_hidden' id='divhis"+index+"'>"+ tx_tasa + tx_a + tx_b + tx_c + tx_d + tx_e + tx_f + tx_g + buttq  +"</div>";
+		var inside = "<div class='element_style_hidden' id='divhis"+index+"'><ul>"+ tx_tasa + tx_a + tx_b + tx_c + tx_d + tx_e + tx_f + tx_g + "</ul>"+ buttq  +"</div>";
 
 
-	var secc_his = document.getElementById("hist_trans");
-	secc_his.innerHTML +=  "<div class='div_list_style'>" + buttm  + titulo + inside + "</div>";
+		var secc_his = document.getElementById("hist_trans");
+		secc_his.innerHTML +=  "<div class='div_list_style'>" + buttm  + titulo + inside + "</div>";
+
+		return ganancia;
+	}
+	
+	return 0;
 }
 function crear_lista_cl() {
 	//var sect_lista = document.getElementById("list_cl");
@@ -170,6 +191,35 @@ function button_pend_hist(index) {
 	bott.setAttribute("id", "bott_reint"+index);
 	bott.setAttribute("onclick", "button_reint_hist("+index+");");
 	bott.innerHTML = "Reintegrar";
+}
+function preloder_selec_mon(id) {
+
+	var selec = document.getElementById(id);
+	var sel_a = document.getElementById("selc_monehi");
+
+	var selc_tx = selec.innerHTML;
+
+	sel_a.innerHTML = selc_tx;
+
+
+	selec.options[gl_selmon].selected=true;
+	sel_a.options[gl_selmon].selected=true;
+
+}
+function preloder_selec_mohi() {
+
+	var selec = document.getElementById("selc_monehi");
+	var sel_a = document.getElementById("selc_monert");
+	var selc_tx = selec.innerHTML;
+	sel_a.innerHTML = selc_tx;
+
+	selec_change_mo("selc_monehi");
+
+
+	selec.options[gl_selmon].selected=true;
+	sel_a.options[gl_selmon].selected=true;
+
+	selec_fechas('selchisfec');
 }
 
 

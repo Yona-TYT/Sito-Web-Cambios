@@ -205,31 +205,13 @@ function init(){
 	//select_list_x();
 	set_basededatos("basededato");
 
-	//Leer documentos tipo hojas de datos
-	importar_datos();
-
-	//Tabal vista previa de documentos
-	table_preview_ex()
 
 	//Solo visible la tabla de lista
  	visible_element(1);
 
-	example_preview();
-
-
-
-
-	//Comprueba y activa/desactiva el modo editor
-	//check_edit_mode();
-
-	//Crea la tabla de lista productos
-	//create_table();
-
-	//Crea la tabla de Registro de productos
-	//create_table_rp();
-
 	int_trans();
-	preloder_filtro_fec();
+	int_history();
+
 
 	//crea la lista de productos
 	//crear_lista_productos();
@@ -240,8 +222,8 @@ function init(){
 	//boton.addEventListener("focus", cambio_valor);
 
 	//Buscador para la lista de productos
-	var input_buscar = document.getElementById("buscar");
-	input_buscar.addEventListener("input", function(){buscar_lista(input_buscar.value);});
+	//var input_buscar = document.getElementById("buscar");
+	//input_buscar.addEventListener("input", function(){buscar_lista(input_buscar.value);});
 
 	//Buscador para el registro de ventas
 	/*var input_buscar_rv = document.getElementById("buscar_rv");

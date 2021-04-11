@@ -4,15 +4,8 @@ function int_trans(){
 	//Selecciona el tipo de moneda
 	var selec = document.getElementById("selc_monert");
 	selec.addEventListener("change", function(){
-
-		var index = selec.options[selec.selectedIndex].value;
-		index = parseInt(index)?parseInt(index):0;
-		gl_selmon = index;
-		var val = (gl_trasn_datos.sel_tasa[index]==null?0:gl_trasn_datos.sel_tasa[index]);
-		var input = document.getElementById("tasa_rt");
-		input.value = val;
-		get_trans_datos();
-		//console.log(+index+"  " );
+		selec_change_mo("selc_monert");
+		selec_fechas('selchisfec');
 
 	});
 
@@ -27,6 +20,20 @@ function int_trans(){
 	});
 
 	create_table_rt();
+}
+
+function selec_change_mo(id){
+	var selec = document.getElementById(id);
+	var index = selec.options[selec.selectedIndex].value;
+	index = parseInt(index)?parseInt(index):0;
+	gl_selmon = index;
+	preloder_selec_mon("selc_monert");
+
+	var val = (gl_trasn_datos.sel_tasa[index]==null?0:gl_trasn_datos.sel_tasa[index]);
+	var input = document.getElementById("tasa_rt");
+	input.value = val;
+
+	get_trans_datos();
 }
 
 
@@ -128,7 +135,7 @@ function guardar_trans_datos(){
 	var mon_ustd = (gl_trasn_datos.mon_ustd[gl_selmon]==null?0:gl_trasn_datos.mon_ustd[gl_selmon]);
 	var mon_ustdve = (gl_trasn_datos.mon_ustdve[gl_selmon]==null?0:gl_trasn_datos.mon_ustdve[gl_selmon]);
 
-	if(moneda !=0 && mon_ustd !=0 && mon_ustdve !=0){
+	if(moneda !=0 && mon_ustd !=0 && mon_ustdve !=0 && tasa !=0){
 		//Calculos de datos--------------------------------------
 		var total_ves = moneda/tasa; //Total VES
 		var usdt_req = total_ves/mon_ustdve; //USDT requeridos
