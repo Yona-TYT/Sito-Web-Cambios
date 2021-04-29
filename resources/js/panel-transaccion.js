@@ -74,12 +74,17 @@ function get_trans_datos(){
 
 
 	//Calculos de datos--------------------------------------
-	var total_ves = val_a/tasa; //Total VES
+	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
+	var total_ves = 0; //Total VES
+	if(selc_simb == "ARS") total_ves = val_a*tasa;
+	if(selc_simb == "COP") total_ves = val_a/tasa;
+
+
 	var usdt_req = total_ves/val_d; //USDT requeridos
 	var mon_req = val_b*usdt_req //Requeridos (Moneda)
 	var ganancia = val_a-mon_req //Ganancia
 
-		console.log(usdt_req);
+
 
 	//Obtenemos los inputs SOLO LECTURA --------------------------------------
 	var input_c = document.getElementById("inputrt12");
@@ -137,7 +142,11 @@ function guardar_trans_datos(){
 
 	if(moneda !=0 && mon_ustd !=0 && mon_ustdve !=0 && tasa !=0){
 		//Calculos de datos--------------------------------------
-		var total_ves = moneda/tasa; //Total VES
+		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
+		var total_ves = 0; //Total VES
+		if(selc_simb == "ARS") total_ves = moneda*tasa;
+		if(selc_simb == "COP") total_ves = moneda/tasa;
+		
 		var usdt_req = total_ves/mon_ustdve; //USDT requeridos
 		var mon_req = mon_ustd*usdt_req //Requeridos (Moneda)
 		var ganancia = moneda-mon_req //Ganancia
