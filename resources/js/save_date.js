@@ -81,6 +81,27 @@ function obtener_datos(evento) {
 		var fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
 
 
+
+		if(!gl_trasn_save.estado){
+			gl_trasn_save.estado = new Array();
+
+		}
+
+	//Temporal ----------------------------------
+	/*
+	try {
+		gl_trasn_save.estado;
+		
+	}
+	catch (e) {
+		gl_trasn_datos = actualizar_obj();
+		//gl_trasn_save.estado = gl_trasn_save.hora;
+		console.log(gl_trasn_datos.estado);
+	}
+
+		load_save_data();
+	*/
+
 		if(fechalist != fecha) {
 
 			if(!fechalist) {
@@ -114,16 +135,19 @@ function obtener_temp(evento) {
 	var resultado = evento.target.result;
 	if(resultado){
 		gl_trasn_datos = resultado.tmpdatos;
-
-		load_save_data();
 	}
+}
+
+function actualizar_obj(){
+	var prop = new Array();
+    return Object.defineProperty(prop,"estado",{value:prop});
 }
 
 //----------------------------------------------------------------------
 
 function all_ventas() {
 	this.indexnomb = 0;
-	this.nombrecl = new Array();
+	this.nombrecl = 
 
 	this.indexfec = 0;
 	this.fechalist = new Array();
