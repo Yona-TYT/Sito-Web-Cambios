@@ -203,6 +203,8 @@ function guardar_trans_datos(){
 		gl_trasn_save.usdt_req[index] = usdt_req;
 		gl_trasn_save.mon_req[index] = mon_req;
 		gl_trasn_save.ganancia[index] = ganancia;
+
+		gl_trasn_save.estado[index] = "Realizada";
 		//-----------------------------------------------------------
 
 		gl_trasn_save.hora[index] = hora;
@@ -217,6 +219,23 @@ function guardar_trans_datos(){
 	}
 	else alert("¡No se permiten valores en blanco o cero!.");
 
+}
+
+function get_dia_ganancia(){
+	var start = gl_trasn_save.indexstart[gl_trasn_save.indexfec];
+	var end = gl_trasn_save.indexend[gl_trasn_save.indexfec];
+	var result = 0;
+	for (var j = start; start != null && j < (end+1); j++) {
+		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
+		var simbd = gl_trasn_save.simbd[j];
+		var ganancia = gl_trasn_save.ganancia[j];
+		var estado = gl_trasn_save.estado[j];
+		if(!estado)estado="Realizada";
+		if(estado == "Realizada" && selc_simb==simbd){
+			result += ganancia;
+		}
+	}
+	return result;
 }
 
 
@@ -234,6 +253,8 @@ function trasn_datos() {
 }
 function trasn_save() {
 	this.id = 1;
+
+	this.estado = new Array();
 
 	this.indexfec = 0;
 	this.fechalist = new Array();
