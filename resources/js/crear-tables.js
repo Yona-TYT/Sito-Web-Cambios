@@ -26,7 +26,7 @@ function create_table(){
 	var tblBody = document.createElement("tbody");
 
 	// Creamos las celdas
-	for (var j = 0; j < 4; j++) {
+	for (var j = 0; j < 2; j++) {
 		// Creamos las hileras de la tabla
 		var fila = document.createElement("tr");
 
@@ -41,73 +41,9 @@ function create_table(){
 		for (var i = 0; i < table_col; i++) {
 
 			var celda_id = j+""+i;
-			if(j==0){
-				var celda = document.createElement("td");
 
-		//console.log(prdol+"  "+ total);
-
-				celda.setAttribute("id", "celd"+celda_id)
-				celda.setAttribute("class","celda_style_td");
-
-				// Creamos 2 elementos de entrada
-				var input = document.createElement("input");
-				input.setAttribute("type", "number");
-				var tex_mask = document.createElement("input");
-				input.setAttribute(edit_mode?"readwrite":"readonly", "");
-
-				tex_mask.setAttribute("readonly", "");
-				tex_mask.setAttribute("class", edit_mode?"input_style_edicion_td":"mask_style");
-
-				//Cuadros de MArgen  ganancia y Precio del dolar----------------------------------------------
-				var textoCelda = document.createTextNode(name_desc_cel[i]);
-				input.setAttribute("class","input_style_hidden");
-				input.setAttribute("onkeyup","update_celdas_generales();");
-				input.setAttribute("onclick","update_celdas_generales();");
-				input.setAttribute("onchange","update_celdas_generales();");
-				//input.setAttribute("onchange","enviar_index();");
-
-				celda.setAttribute("colspan","3");
-				if(i==0){
-					input.remove();
-					celda.setAttribute("class",edit_mode?"celda_style_x":"input_style_hidden");
-					var celda_desc = document.createElement("th");
-					celda_desc.setAttribute("class",edit_mode?"celda_style_x":"input_style_hidden");
-					celda_desc.appendChild(textoCelda);
-					fila.appendChild(celda_desc);
-				}
-				//input.setAttribute("onclick","cambio_valor();");
-				if(i == 2 || i == 4){
-					input.setAttribute("step", "10");
-					input.setAttribute("min", "0.00");
-					input.setAttribute("lang", "en");
-
-					//gloval_test = document.getElementById("input"+celda_id);
-					input.setAttribute("id", "input"+celda_id);
-					//para la mask del cuadro
-					var text_mask_id = celda_id;
-					tex_mask.setAttribute("id", "text_mask"+text_mask_id);
-
-					var celda_desc = document.createElement("th");
-					celda_desc.setAttribute("class","desc_style");
-
-					celda_desc.appendChild(textoCelda);
-					fila.appendChild(celda_desc);
-					celda.appendChild(tex_mask);
-					celda.appendChild(input);
-					fila.appendChild(celda);
-
-					var total_id_a = j;
-					var total_id_b = multiplo;
-					//input.setAttribute("onChange", "enviar_index("+total_id_a+","+total_id_b+");" );
-					tex_mask.setAttribute("onClick", edit_mode?"mostrar_input();":"");
-					tex_mask.setAttribute("onSelect", edit_mode?"mostrar_input();":"");
-					input.setAttribute("onFocus", edit_mode?"ocultar_input();":"");
-
-				}
-				tblBody.appendChild(fila);
-			}
 			//Cuadros de nombres de columnas
-			else if(j==1){
+			if(j==1){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celd"+celda_id)
