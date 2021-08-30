@@ -2,6 +2,7 @@
 <html lang="es">
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
 		<title>Tu Cambio Vzla.</title>
 
 		<link rel="icon" href="resources/img/icono.png" type="image/png"sizes="50x50">
@@ -26,7 +27,7 @@
 		<! Fin del CSS -->
 	</head>
 	<body onLoad="init();" >
-		<section class="label_style">
+		<section class="menu_style">
 
 			<h1 class="mask_style">Proyecto Monedas</h1>
 
@@ -42,66 +43,66 @@
 				<button class="mask_style" type="button" id="butopt3" onclick="visible_element(3);">
 				Historial de Transacciones
 			</div>
-		</section>
 
-		<! ---------------- Seccion1 Registro de Transacciones ------------------>
+			<! ---------------- Seccion1 Registro de Transacciones ------------------>
 
-		<section class="label_style" id="seccion1">
-			<div class="cajas_style">Seleccione Moneda: 
-				<select class="mask_style" id="selc_monert" >
-					<option id="money0" value="0">COP</option>
-					<option id="money1" value="1">ARS</option>
-				</select>
-			</div>
+			<section  id="seccion1">
+				<div class="cajas_style">Seleccione Moneda: 
+					<select class="mask_style" id="selc_monert" >
+						<option id="money0" value="0">COP</option>
+						<option id="money1" value="1">ARS</option>
+					</select>
+				</div>
 
-			<div class="cajas_style">
+				<div class="cajas_style">
 
-			</div>
-			<div class="cajas_style">
-				Tasa (Moneda Seleccionada): 
-				<input class="mask_style" type="number" id="tasa_rt">
-				Total Diario (Moneda Seleccionada): 
-				<input class="mask_style" type="text" id="total_rt" readonly>
-			</div>
+				</div>
+				<div class="cajas_style">
+					Tasa (Moneda Seleccionada): 
+					<input class="mask_style" type="number" id="tasa_rt">
+					Total Diario (Moneda Seleccionada): 
+					<input class="mask_style" type="text" id="total_rt" readonly>
+				</div>
 
-			<section id="sect_rt"></section>
+				<section id="sect_rt"></section>
 
-			<div class="cajas_style"><button class="mask_style" type="button" id="butt_regrt" onclick="guardar_trans_datos();">Registrar</button></div>
-		</section>
-		<! ------- Seccion2 Conversiones moneda ------------- >
-		<section class="label_style" id="seccion2">
+				<div class="cajas_style"><button class="mask_style" type="button" id="butt_regrt" onclick="guardar_trans_datos();">Registrar</button></div>
+			</section>
+			<! ------- Seccion2 Conversiones moneda ------------- >
+			<section  id="seccion2">
 
-			<div class="cajas_style">
-				<label for="sel_conver">Covertir: </label>
-				<select class="mask_style" id="sel_conver" onchange = "resultado_conver();" >
-					<option id="conv0" value="0">Pesos a BsF</option>
-					<option id="conv1" value="1">Bsf a Pesos</option>
+				<div class="cajas_style">
+					<label for="sel_conver">Covertir: </label>
+					<select class="mask_style" id="sel_conver" onchange = "resultado_conver();" >
+						<option id="conv0" value="0">Pesos a BsF</option>
+						<option id="conv1" value="1">Bsf a Pesos</option>
 
-				</select>
-			</div>
-			<div class="cajas_style">Tasa de Cambio: <input class="mask_style" type="number" oninput="resultado_conver();" id="rt_tasa" min="0.01" step="0,00001" value="0"></div>
-			<div class="cajas_style">
-				Ingrese Monto: <input class="mask_style" type="number" oninput="resultado_conver();" id="rt_input_a" min="0,11" step="1" value="0,00">
-				Resultado: <input class="mask_style" type="text" id="rt_input_b" value="0,00" readonly>
-			</div>
-			<datalist id="list_pesos"></datalist>
-			<datalist id="list_bsf"></datalist>
-		</section>
+					</select>
+				</div>
+				<div class="cajas_style">Tasa de Cambio: <input class="mask_style" type="number" oninput="resultado_conver();" id="rt_tasa" min="0.01" step="0,00001" value="0"></div>
+				<div class="cajas_style">
+					Ingrese Monto: <input class="mask_style" type="number" oninput="resultado_conver();" id="rt_input_a" min="0,11" step="1" value="0,00">
+					Resultado: <input class="mask_style" type="text" id="rt_input_b" value="0,00" readonly>
+				</div>
+				<datalist id="list_pesos"></datalist>
+				<datalist id="list_bsf"></datalist>
+			</section>
 
-		<! ------- Seccion3 Historial de Transacciones ------------- >
-		<section class="label_style" id="seccion3">
-			<div class="cajas_style">Seleccione Fecha: 
-				<select class="mask_style" id="selchisfec"></select>
-			</div>
-			<div class="cajas_style">Seleccione Moneda: 
-				<select class="mask_style" id="selc_monehi" onchange = "preloder_selec_mohi();"></select>
-			</div>
-			<div class="cajas_style">
-				Ganancia Total : 
-				<input class="mask_style" type="text" id="total_hist">
-			</div>
-			<section class="label_style" id="hist_trans"></section>
-			<datalist id="list_datacl"></datalist>
+			<! ------- Seccion3 Historial de Transacciones ------------- >
+			<section  id="seccion3">
+				<div class="cajas_style">Seleccione Fecha: 
+					<select class="mask_style" id="selchisfec"></select>
+				</div>
+				<div class="cajas_style">Seleccione Moneda: 
+					<select class="mask_style" id="selc_monehi" onchange = "preloder_selec_mohi();"></select>
+				</div>
+				<div class="cajas_style">
+					Ganancia Total : 
+					<input class="mask_style" type="text" id="total_hist">
+				</div>
+				<section class="label_style" id="hist_trans"></section>
+				<datalist id="list_datacl"></datalist>
+			</section>
 		</section>
 	</body>
 </html>

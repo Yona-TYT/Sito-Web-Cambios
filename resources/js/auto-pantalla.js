@@ -9,13 +9,13 @@ function check_windows_siz() {
 
 	if(ancho <= 480){
 		console.log(+ancho+"  " +font_siz);
-		objref.style.setProperty("--siz-text", '30%');
+		objref.style.setProperty("--siz-text", '60%');
 		gl_mobil = true;
 		int_trans();
 	}
 	else if(ancho <= 768){
 		console.log(+ancho+"  " +font_siz);
-		objref.style.setProperty("--siz-text", '60%');
+		objref.style.setProperty("--siz-text", '90%');
 		gl_mobil = true;
 		int_trans();
 	}

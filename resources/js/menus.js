@@ -71,19 +71,19 @@ function visible_element(opt) {
 	if(opt==1) {
 		historial.setAttribute("class","element_style_hidden");
 		table_regpro.setAttribute("class","element_style_hidden");
-		table_regvent.setAttribute("class","label_style");
+		table_regvent.setAttribute("class","");
 	}
 	//Conversion moneda
 	if(opt==2) {
 		table_regvent.setAttribute("class","element_style_hidden");
 		historial.setAttribute("class","element_style_hidden");
-		table_regpro.setAttribute("class","label_style");
+		table_regpro.setAttribute("class","");
 	}
 	//Historial de Transacciones
 	if(opt==3) {
 		table_regvent.setAttribute("class","element_style_hidden");
 		table_regpro.setAttribute("class","element_style_hidden");
-		historial.setAttribute("class","label_style");
+		historial.setAttribute("class","");
 	}
 }
 
