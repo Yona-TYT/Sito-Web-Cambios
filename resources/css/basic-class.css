@@ -3,6 +3,7 @@
   --all-height: 100%;
   --mask-height: 5%;
   --caja-disp: inline-block;
+  --all-bord: 1px;
 }
 
 html, body {  
@@ -30,7 +31,7 @@ html, body {
 	width: 99%;
 	height:var(--all-height);
 
-	border-width: 2px;
+	border-width: var(--all-bord);
 	border-style: solid;
 	border-color: #fafafa;
 
@@ -47,7 +48,7 @@ html, body {
 	width: 99%;
 	height:var(--all-height);
 
-	border-width: 2px;
+	border-width: var(--all-bord);
 	border-style: solid;
 	border-color: #fafafa;
 
@@ -67,7 +68,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: rgba(20, 24, 80, 0.5);
 	overflow: hidden;
@@ -85,7 +86,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: rgba(67, 195, 48, 0.4);
 	overflow: hidden;
@@ -104,7 +105,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 
 	overflow: hidden;
@@ -123,7 +124,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: #6e3068;
 
@@ -144,7 +145,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #0000ff;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 
 	overflow: hidden;
@@ -162,7 +163,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #fffffe;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: #6e3068;
 	overflow: hidden;
@@ -180,7 +181,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #fffffe;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background-color: #ce181e;
 
@@ -210,7 +211,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #ffffff;
-	border-width: 1px;
+	border-width: var(--all-bord);
 
 	color: #ffffff;
 	width: 10%;
@@ -263,7 +264,7 @@ html, body {
 
 	border-style: dotted;
 	border-color: #fffffe;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background: #2a7991;
 	overflow: hidden;
@@ -281,7 +282,7 @@ html, body {
 
 	border-style: solid;
 	border-color: #000000;
-	border-width: 2px;
+	border-width: var(--all-bord);
 
 	background: rgba(225, 225, 225, 0.9);
 	overflow: hidden;
@@ -349,7 +350,7 @@ html, body {
 	width: 100%;
 	height:var(--all-height);
 
-	border-width: 1px;
+	border-width: var(--all-bord);
 	border-style: solid;
 	border-color: #fafafa;
 
@@ -365,7 +366,7 @@ html, body {
 	width: 10%;
 	height:var(--all-height);
 
-	border-width: 2px;
+	border-width: var(--all-bord);
 	border-style: dotted;
 	border-color: #fafafa;
 
@@ -426,7 +427,7 @@ tr, .fila_style:hover {
 	width: 5%;
 	height:var(--all-height);
 
-	border-width: 2px;
+	border-width: var(--all-bord);
 	border-style: solid;
 	border-color: #fafafa;
 
