@@ -459,7 +459,7 @@ tr, .fila_style:hover {
 }
 
 input::placeholder{
-	color: #abb0b3;
+	color: #e8eef2;
 }
 
 input[type='file'] {
