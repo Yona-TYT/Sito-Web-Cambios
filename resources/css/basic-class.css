@@ -458,6 +458,10 @@ tr, .fila_style:hover {
 
 }
 
+input::placeholder{
+	color: #abb0b3;
+}
+
 input[type='file'] {
 
 	text-align: left;
