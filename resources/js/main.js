@@ -169,7 +169,7 @@ function cursor_no_button(id)
 
 
 function init(){
-
+	check_windows_siz();
 	gl_list[gl_selc] = new result_list_a();
 
 	//test arrays bidimencionales
@@ -231,6 +231,8 @@ function init(){
 }
 //window.addEventListener("load", click_test);
 //window.addEventListener("keypress", is_enter_press);
+
+window.addEventListener("resize", check_windows_siz);
 
 window.addEventListener("keypress", function() {
 

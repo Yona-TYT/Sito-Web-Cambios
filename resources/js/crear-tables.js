@@ -81,7 +81,6 @@ function create_table(){
 					input.setAttribute("min", "0.00");
 					input.setAttribute("lang", "en");
 
-					//gloval_test = document.getElementById("input"+celda_id);
 					input.setAttribute("id", "input"+celda_id);
 					//para la mask del cuadro
 					var text_mask_id = celda_id;
@@ -268,7 +267,9 @@ function create_table_rt(){
 	var tblBody = document.createElement("tbody");
 
 	// Creamos las celdas
-	for (var j = 0; j < 2; j++) {
+	var siz_col = gl_mobil? 2:7;
+	var siz_fil = gl_mobil? 7:2;
+	for (var j = 0; j < siz_fil; j++) {
 		// Creamos las hileras de la tabla
 		var fila = document.createElement("tr");
 
@@ -276,12 +277,14 @@ function create_table_rt(){
 
 		var multiplo = (j*table_col);
 		save_id_filas[j] = j+multiplo;
-		for (var i = 0; i < 7; i++) {
+		for (var i = 0; i < siz_col; i++) {
 
-			var celda_id = j+""+i;
+			var siz_f = gl_mobil?i:j;
+			var siz_c = gl_mobil?j:i;
+			var celda_id = siz_f+""+siz_c;
 			
 			//Cuadros de nombres de columnas
-			if(j==0){
+			if(siz_f==0){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celdrt"+celda_id)
@@ -297,7 +300,7 @@ function create_table_rt(){
 				tex_mask.setAttribute("class", "input_style_edicion_td");
 
 				input.setAttribute("type", "text");
-				input.setAttribute("value", name_cel[i]);
+				input.setAttribute("value", name_cel[siz_c]);
 				input.setAttribute("readonly", "");
 				input.setAttribute("class","colum_name_style");
 				//celda.appendChild(input);
@@ -308,7 +311,7 @@ function create_table_rt(){
 			}
 			//--------------------------------------------------------------------------------------------------
 
-			else if(j==1){
+			else if(siz_f==1){
 				//lista_tx += add_text_fila(j);
 
 				var celda = document.createElement("td");
@@ -342,7 +345,7 @@ function create_table_rt(){
 					input.setAttribute("onFocus", "ocultar_input();");
 				}*/
 				//Cuadros de entrada numerica
-				if(i==0 || i==1 || i==3 ){
+				if(siz_c==0 || siz_c==1 || siz_c==3 ){
 
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("placeholder", "Ingrese Valor");
