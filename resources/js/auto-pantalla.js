@@ -6,7 +6,7 @@ function check_windows_siz() {
 
 	var objref = document.body
 	var font_siz = getComputedStyle(objref).getPropertyValue("--siz-text");
-
+alert(ancho);
 	if(ancho <= 480){
 		console.log(+ancho+"  " +font_siz);
 		objref.style.setProperty("--siz-text", '30%');
