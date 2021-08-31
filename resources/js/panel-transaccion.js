@@ -151,23 +151,11 @@ function guardar_trans_datos(){
 		var mon_req = mon_ustd*usdt_req //Requeridos (Moneda)
 		var ganancia = moneda-mon_req //Ganancia
 
-
-
 		//Reinici los valores------------------------------------
 		gl_trasn_datos.moneda[gl_selmon] = 0;
 		gl_trasn_datos.mon_ustd[gl_selmon] = 0;
 		gl_trasn_datos.mon_ustdve[gl_selmon] = 0;
-
-		document.getElementById("inputrt10").value = "";
-		document.getElementById("inputrt11").value = "";
-		document.getElementById("inputrt12").value = "";
-		document.getElementById("inputrt13").value = "";
-		document.getElementById("inputrt14").value = "";
-		document.getElementById("inputrt15").value = "";
-		document.getElementById("inputrt16").value = "";
-		document.getElementById("text_maskrt10").value = "";
-		document.getElementById("text_maskrt11").value = "";
-		document.getElementById("text_maskrt13").value = "";
+		reset_all_inputs();
 
 		var hoy = new Date();
 		var hora =  hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
@@ -238,6 +226,36 @@ function get_dia_ganancia(){
 	return result;
 }
 
+function reset_all_inputs(){
+	
+	var inputa = document.getElementById("inputrt10");
+	var inputb = document.getElementById("inputrt11");
+	var inputc = document.getElementById("inputrt12");
+	var inputd = document.getElementById("inputrt13");
+	var inpute = document.getElementById("inputrt14");
+	var inputf = document.getElementById("inputrt15");
+	var inputg = document.getElementById("inputrt16");
+	var inputh = document.getElementById("text_maskrt10");
+	var inputi = document.getElementById("text_maskrt11");
+	var inputj = document.getElementById("text_maskrt13");
+
+	inputa.value = "";
+	inputa.setAttribute("placeholder", "Ingrese Valor");
+	inputb.value = "";
+	inputb.setAttribute("placeholder", "Ingrese Valor");
+	inputc.value = "";
+	inputd.value = "";
+	inputd.setAttribute("placeholder", "Ingrese Valor");
+	inpute.value = "";
+	inputf.value = "";
+	inputg.value = "";
+	inputh.value = "";
+	inputh.setAttribute("placeholder", "Ingrese Valor");
+	inputi.value = "";
+	inputi.setAttribute("placeholder", "Ingrese Valor");
+	inputj.value = "";
+	inputj.setAttribute("placeholder", "Ingrese Valor");
+}
 
 function trasn_datos() {
 	this.id = 1;
