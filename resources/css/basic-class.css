@@ -1,9 +1,10 @@
 :root {
-  --siz-text: 100%;
-  --all-height: 110%;
-  --mask-height: 5%;
-  --caja-disp: inline-block;
-  --all-bord: 1px;
+	--siz-text: 100%;
+	--all-height: 110%;
+	--mask-height: 5%;
+	--caja-disp: inline-block;
+	--all-bord: 1px;
+	--alig-text: center;
 }
 
 html, body {  
@@ -140,7 +141,7 @@ html, body {
 	font-weight: bold;
 	font-size:var(--siz-text);
 
-	width: 10%;
+	width: auto;
 	height: 10%;
 
 	border-style: solid;
@@ -378,7 +379,7 @@ html, body {
 .colum_name_style {
 
 	color: #fffffe;
-	text-align: center;
+	text-align:var(--alig-text);
 	font-weight: bold;
 	font-size:var(--siz-text);
 
