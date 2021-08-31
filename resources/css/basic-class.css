@@ -5,6 +5,7 @@
 	--caja-disp: inline-block;
 	--all-bord: 1px;
 	--alig-text: center;
+	--cel-siz: auto;
 }
 
 html, body {  
@@ -141,7 +142,7 @@ html, body {
 	font-weight: bold;
 	font-size:var(--siz-text);
 
-	width: auto;
+	width:var(--cel-siz);
 	height: 10%;
 
 	border-style: solid;
