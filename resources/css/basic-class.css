@@ -8,11 +8,6 @@
 	--cel-siz: auto;
 }
 
-html, body {  
-   margin:0px;  
-   height:var(--all-height);
- }
-
 .cajas_style {
 
 	display:var(--caja-disp);
@@ -38,7 +33,9 @@ html, body {
 	border-color: #fafafa;
 
 	margin-left: 0.2%;
-	background-color: #219f90;
+
+	margin: 15% auto;
+	background-color: rgba(33, 159, 144, 0.7);
 }
 
 .label_style {
@@ -55,7 +52,7 @@ html, body {
 	border-color: #fafafa;
 
 	margin-left: 0.2%;
-	background-color: #219f90;
+	background-color: rgba(33, 159, 144, 0.3);
 }
 
 .colum_selec_style {
