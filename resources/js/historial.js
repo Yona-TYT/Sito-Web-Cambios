@@ -178,4 +178,36 @@ function preloder_selec_mohi() {
 	selec_fechas('selchisfec');
 }
 
+function eliminar_todo(opt){
+	var butt = document.getElementById("buthist");
+	var label = document.getElementById("histlabel");
+	var check = document.getElementById("histcheck");
+	if(opt==0){
+		label.setAttribute("class", "cajas_style");
+		check.checked = false;
+		butt.setAttribute("onclick", "eliminar_todo(1)");
+		alert("Marque la casilla para confirmar y vuelva a pulsar.");
+	}
+	if(opt==1){
+		label.setAttribute("class", "input_style_hidden");
+		butt.setAttribute("onclick", "eliminar_todo(0)");
+		if(check.checked){
+			check.checked = false;
+			clear_history();
+			alert("Se ha borrado el Historial.");
+		}
+	}
+}
+function clear_history(){
+	var gl_trasn_datos = new trasn_datos();
+	add_temp(gl_trasn_datos);
+
+	gl_trasn_save = new trasn_save();
+	add_transa(gl_trasn_save);
+
+	preloder_filtro_fec();
+
+	preloder_selec_mon("selc_monert");
+	selec_fechas("selchisfec");
+}
 

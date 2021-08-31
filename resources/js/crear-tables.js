@@ -31,7 +31,6 @@ function create_table(){
 		var fila = document.createElement("tr");
 
 		fila.setAttribute("id", "fila"+j);
-		fila.setAttribute("class","label_style");
 
 		//fila.setAttribute("onmouseover", "cursor_en_fila("+j+");" );
 		//fila.setAttribute("onmouseout", "cursor_no_fila("+j+");" );

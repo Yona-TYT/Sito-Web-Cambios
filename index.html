@@ -29,7 +29,7 @@
 	<body onLoad="init();" >
 		<section class="menu_style">
 
-			<h1 class="mask_style">Proyecto Monedas</h1>
+			<h1 class="input_style_td">Proyecto Monedas</h1>
 
 			<div class="cajas_style">
 				<button class="mask_style" type="button" id="butopt1" onclick="visible_element(1);">
@@ -100,7 +100,14 @@
 					Ganancia Total : 
 					<input class="mask_style" type="text" id="total_hist">
 				</div>
-				<section class="label_style" id="hist_trans"></section>
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="buthist" onclick="eliminar_todo(0);">
+					Borrar Historial
+				</div>
+				<label class="input_style_hidden" id="histlabel">
+					Confirmar Aqui: <input  type="checkbox" id="histcheck">
+				</label>
+				<section  id="hist_trans"></section>
 				<datalist id="list_datacl"></datalist>
 			</section>
 		</section>
