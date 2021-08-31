@@ -186,7 +186,7 @@ function eliminar_todo(opt){
 		label.setAttribute("class", "cajas_style");
 		check.checked = false;
 		butt.setAttribute("onclick", "eliminar_todo(1)");
-		alert("Marque la casilla para confirmar y vuelva a pulsar.");
+		alert("Estas a punto de borrar todo, marque la casilla para confirmar y vuelva a pulsar.");
 	}
 	if(opt==1){
 		label.setAttribute("class", "input_style_hidden");
@@ -194,7 +194,7 @@ function eliminar_todo(opt){
 		if(check.checked){
 			check.checked = false;
 			clear_history();
-			alert("Se ha borrado el Historial.");
+			alert("Se ha borrado Todo el Historial.");
 		}
 	}
 }
