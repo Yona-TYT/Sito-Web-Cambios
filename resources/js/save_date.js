@@ -74,9 +74,7 @@ function obtener_selec(evento) {
 	var resultado = evento.target.result;
 	gl_hist_save = new trasn_save();
 	if(resultado){
-		var id = resultado.id;
-
-
+		//var id = resultado.id;
 		gl_hist_save = resultado.rtdatos;
 		var nr = gl_hist_save.index;
 		for (var j = nr;  j >= 0; j--) {
@@ -181,6 +179,11 @@ function obtener_temp(evento) {
 	if(resultado){
 		gl_trasn_datos = resultado.tmpdatos;
 		gl_curr_optsel = gl_trasn_datos.save_id;
+
+		var input = document.getElementById("tasa_rt");
+		var valor = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon])?parseFloat(gl_trasn_datos.sel_tasa[gl_selmon]):0;
+		input.value = valor;
+
 		//console.log(""+gl_trasn_datos.save_id+" index");
 		mostrar_datos(gl_curr_optsel);
 	}
