@@ -23,13 +23,9 @@ var current_element = null;
 var current_key = null;
 var gloval_test = "";
 
-var gl_result = new result_list_a();
-
 //Test lista de productos
-var gl_list = new Array();
 var gl_selc = 0;
 
-var gl_listname = new allnames_list();
 var start_one = true;
 var is_start = true;
 function load_save_data(){
@@ -114,8 +110,7 @@ function click_test(){
 	//gloval_test ="";
 
 	//get_celda_value(table_fila,table_col);
-var gl_trasn_save = new all_ventas();
-		agregarventas(gl_trasn_save);
+
 
 }
 
@@ -170,7 +165,6 @@ function cursor_no_button(id)
 
 function init(){
 	check_windows_siz();
-	gl_list[gl_selc] = new result_list_a();
 
 	//test arrays bidimencionales
 	/*	

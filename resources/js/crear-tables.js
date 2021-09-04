@@ -43,7 +43,7 @@ function create_table(){
 			if(j==0){
 				var celda = document.createElement("td");
 
-		//console.log(prdol+"  "+ total);
+				//console.log(prdol+"  "+ total);
 
 				celda.setAttribute("id", "celd"+celda_id)
 				celda.setAttribute("class","celda_style_td");
@@ -252,7 +252,7 @@ function create_table_rt(){
 
 	//----------------------------------------------------------------
 	//Nombre de las celdas value--------------------------------------
-	var name_cel = ["Moneda", "Moneda/USDT", "USDT Requeridos", "VES/USDT", "Total VES", "Requeridos (Moneda)", "Ganancia"];
+	var name_cel = ["Moneda", "Moneda/USDT", "VES/USDT", "USDT Requeridos", "Total VES", "Requeridos (Moneda)", "Ganancia"];
 	//----------------------------------------------------------------
 
 	var sect_table = document.getElementById("sect_rt");
@@ -344,7 +344,7 @@ function create_table_rt(){
 					input.setAttribute("onFocus", "ocultar_input();");
 				}*/
 				//Cuadros de entrada numerica
-				if(siz_c==0 || siz_c==1 || siz_c==3 ){
+				if(siz_c==0 || siz_c==1 || siz_c==2 ){
 
 					input.setAttribute("class","input_style_td");
 					input.setAttribute("placeholder", "Ingrese Valor");

@@ -13,7 +13,9 @@ function int_trans(){
 	input.addEventListener("input", function(){
 
 		var input = document.getElementById("tasa_rt");
-		gl_trasn_datos.sel_tasa[gl_selmon] = parseFloat(input.value)?parseFloat(input.value):0;
+		var valor = parseFloat(input.value)?parseFloat(input.value):0;
+		gl_trasn_datos.sel_tasa[gl_selmon] = valor;
+		input.setAttribute("step", ""+(1*valor)+"");
 		//console.log(+input.value+"  " );
 		get_trans_datos();
 
@@ -31,7 +33,12 @@ function selec_change_mo(id){
 
 	var val = (gl_trasn_datos.sel_tasa[index]==null?0:gl_trasn_datos.sel_tasa[index]);
 	var input = document.getElementById("tasa_rt");
+	input.setAttribute("step", ""+(1*val)+"");
 	input.value = val;
+
+	var cv_input = document.getElementById("cv_tasa");
+	cv_input.setAttribute("step", ""+(1*val)+"");
+	cv_input.value = val;
 
 	get_trans_datos();
 }
@@ -57,65 +64,59 @@ function get_trans_datos(){
 	//Obtenemos los inputs ESCRITURA ---------------------------------------
 	var input_a = document.getElementById("inputrt10");
 	var input_b = document.getElementById("inputrt11");
-	var input_d = document.getElementById("inputrt13");
+	var input_c = document.getElementById("inputrt12");
 
 	var val_a = parseFloat(input_a.value)?parseFloat(input_a.value):0;
 	var val_b = parseFloat(input_b.value)?parseFloat(input_b.value):0;
-	var val_d = parseFloat(input_d.value)?parseFloat(input_d.value):0;
+	var val_c = parseFloat(input_c.value)?parseFloat(input_c.value):0;
 
 	//Guarda los valores
 	gl_trasn_datos.moneda[sel_nr] = val_a;
 	gl_trasn_datos.mon_ustd[sel_nr] = val_b;
-	gl_trasn_datos.mon_ustdve[sel_nr] = val_d;
+	gl_trasn_datos.mon_ustdve[sel_nr] = val_c;
 
 	add_temp(gl_trasn_datos);
 	
 	//------------------------------------------------------------------------
-
-
 	//Calculos de datos--------------------------------------
 	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
 	var total_ves = 0; //Total VES
 	if(selc_simb == "ARS") total_ves = val_a*tasa;
 	if(selc_simb == "COP") total_ves = val_a/tasa;
 
-
-	var usdt_req = total_ves/val_d; //USDT requeridos
+	var usdt_req = total_ves/val_c; //USDT requeridos
 	var mon_req = val_b*usdt_req //Requeridos (Moneda)
 	var ganancia = val_a-mon_req //Ganancia
 
-
-
 	//Obtenemos los inputs SOLO LECTURA --------------------------------------
-	var input_c = document.getElementById("inputrt12");
+	var input_d = document.getElementById("inputrt13");
 	var input_e = document.getElementById("inputrt14"); 
 	var input_f = document.getElementById("inputrt15");
 	var input_g = document.getElementById("inputrt16");
 
-	input_c.value = get_mask("", usdt_req, "(USDT)");
+	input_d.value = get_mask("", usdt_req, "(USDT)");
 	input_e.value = get_mask("", total_ves, "VES");
 	input_f.value = get_mask(simbi, mon_req, "");
 	input_g.value = get_mask(simbi, ganancia, "");
 
 	//------------------------------------------------------------------------
-
 	//Obtenemos los inputs LECTURA DE MASK MONEDA
 	var mask_a = document.getElementById("text_maskrt10");
 	var mask_b = document.getElementById("text_maskrt11");
-	var mask_d = document.getElementById("text_maskrt13");
+	var mask_c = document.getElementById("text_maskrt12");
 
 
 	mask_a.value = get_mask(simbi, input_a.value, "("+simbd+")");
 	mask_b.value = get_mask("", input_b.value, "("+simbd+"/USDT)");
-	mask_d.value = get_mask("", input_d.value, "(VES/USDT)");
+	mask_c.value = get_mask("", input_c.value, "(VES/USDT)");
 
 }
 
 function resultado_conver(){
 	var selec = document.getElementById("sel_conver");
-	var tasa = document.getElementById("rt_tasa");
-	var input_a = document.getElementById("rt_input_a");
-	var input_b = document.getElementById("rt_input_b");
+	var tasa = document.getElementById("cv_tasa");
+	var input_a = document.getElementById("cv_input_a");
+	var input_b = document.getElementById("cv_input_b");
 
 	var num_a =  parseFloat(input_a.value)?parseFloat(input_a.value):0;
 	var num_b =  parseFloat(input_b.value)?parseFloat(input_b.value):0;
@@ -159,61 +160,60 @@ function guardar_trans_datos(){
 
 		var hoy = new Date();
 		var hora =  hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
-		var fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
+		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "--" + hoy.getFullYear();
 
-		var index = gl_trasn_save.index;
-		var indexfec = gl_trasn_save.indexfec;
-		var fechalist = gl_trasn_save.fechalist[indexfec];
+		var fecha = gl_trasn_datos.fecha;
 
-		if(fechalist != fecha) {
-			if(!fechalist) {
-				gl_trasn_save.indexstart[indexfec] = index;
-				gl_trasn_save.fechalist[indexfec] = fecha;
+		if(fecha != curr_fecha) {
+			if(!fecha) {
+				gl_trasn_datos.fecha = curr_fecha;
+				gl_trasn_datos.fechalist[gl_trasn_datos.index] = curr_fecha;
 			}
-
-			else{
-				indexfec++
-				gl_trasn_save.indexstart[indexfec] = index;
-				gl_trasn_save.indexfec = indexfec;
-				gl_trasn_save.fechalist[indexfec] = fecha;
+			else {
+				gl_trasn_datos.index = 0;
+				gl_trasn_datos.save_id++;
+				gl_trasn_datos.fecha = curr_fecha;
+				gl_trasn_datos.fechalist[gl_trasn_datos.index] = curr_fecha;
 			}
 		}
 
-		//Guarda los valores----------------------------------------
+		var index = gl_trasn_datos.index;
+
+		//Guarda los datos de transferencia----------------------------------------
 		gl_trasn_save.simbd[index] = simbd;
 		gl_trasn_save.simbi[index] = simbi;
-
+		gl_trasn_save.tasa[index] = tasa;
 		gl_trasn_save.moneda[index] = moneda;
 		gl_trasn_save.mon_ustd[index] = mon_ustd;
 		gl_trasn_save.mon_ustdve[index] = mon_ustdve;
-
 		gl_trasn_save.total_ves[index] = total_ves;
 		gl_trasn_save.usdt_req[index] = usdt_req;
 		gl_trasn_save.mon_req[index] = mon_req;
 		gl_trasn_save.ganancia[index] = ganancia;
-
 		gl_trasn_save.estado[index] = "Realizada";
+		gl_trasn_save.hora[index] = hora;
+		gl_trasn_save.fecha[index] = curr_fecha;
+		gl_trasn_save.id = gl_trasn_datos.save_id;
 		//-----------------------------------------------------------
 
-		gl_trasn_save.hora[index] = hora;
-		gl_trasn_save.fecha[index] = fecha;
-		gl_trasn_save.indexend[indexfec] = index;
-		gl_trasn_save.index++;
+		gl_trasn_datos.index++;		// Cambia al la siguiente transferencia
+		gl_trasn_save.index = gl_trasn_datos.index;
 
+		add_temp(gl_trasn_datos);
 		add_transa(gl_trasn_save);
+		mostrar_datos(gl_trasn_datos.save_id);
 
-		preloder_filtro_fec();
-		selec_fechas("selchisfec");
 	}
 	else alert("¡No se permiten valores en blanco o cero!.");
 
 }
 
 function get_dia_ganancia(){
-	var start = gl_trasn_save.indexstart[gl_trasn_save.indexfec];
-	var end = gl_trasn_save.indexend[gl_trasn_save.indexfec];
+	//var start = gl_trasn_save.indexstart[gl_trasn_save.indexfec];
+	//var end = gl_trasn_save.indexend[gl_trasn_save.indexfec];
 	var result = 0;
-	for (var j = start; start != null && j < (end+1); j++) {
+	var index = gl_trasn_datos.index;
+	for (var j = 0; j <= index; j++) {
 		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
 		var simbd = gl_trasn_save.simbd[j];
 		var ganancia = gl_trasn_save.ganancia[j];
@@ -237,15 +237,15 @@ function reset_all_inputs(){
 	var inputg = document.getElementById("inputrt16");
 	var inputh = document.getElementById("text_maskrt10");
 	var inputi = document.getElementById("text_maskrt11");
-	var inputj = document.getElementById("text_maskrt13");
+	var inputj = document.getElementById("text_maskrt12");
 
 	inputa.value = "";
 	inputa.setAttribute("placeholder", "Ingrese Valor");
 	inputb.value = "";
 	inputb.setAttribute("placeholder", "Ingrese Valor");
 	inputc.value = "";
+	inputc.setAttribute("placeholder", "Ingrese Valor");
 	inputd.value = "";
-	inputd.setAttribute("placeholder", "Ingrese Valor");
 	inpute.value = "";
 	inputf.value = "";
 	inputg.value = "";
@@ -257,45 +257,4 @@ function reset_all_inputs(){
 	inputj.setAttribute("placeholder", "Ingrese Valor");
 }
 
-function trasn_datos() {
-	this.id = 1;
 
-	this.sel_money = new Array();
-	this.sel_tasa =  new Array();
-	this.sel_simbd = ["COP", "ARS"];
-	this.sel_simbi = ["$", "$"];
-
-	this.moneda = new Array();
-	this.mon_ustd = new Array();
-	this.mon_ustdve = new Array();
-}
-function trasn_save() {
-	this.id = 1;
-
-	this.estado = new Array();
-
-	this.indexfec = 0;
-	this.fechalist = new Array();
-
-	this.indexstart = new Array();
-	this.indexend = new Array();
-
-	this.index = 0;
-
-	this.fecha = new Array();
-	this.hora = new Array();
-
-	this.simbd = new Array();
-	this.simbi = new Array();
-
-
-	this.tasa = new Array();
-	this.moneda = new Array();
-	this.mon_ustd = new Array();
-	this.mon_ustdve = new Array();
-
-	this.total_ves = new Array();
-	this.usdt_req = new Array();
-	this.mon_req = new Array();
-	this.ganancia = new Array();
-}

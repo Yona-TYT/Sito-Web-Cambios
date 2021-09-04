@@ -1,3 +1,6 @@
+gl_curr_optsel = 0;
+gl_hist_save = new trasn_save();
+
 function int_history() {
 	preloder_filtro_fec();
 	preloder_selec_mon("selc_monert");
@@ -5,42 +8,47 @@ function int_history() {
 
 function preloder_filtro_fec() {
 	var selec = document.getElementById("selchisfec");
-	var indexfec = gl_trasn_save.indexfec;
+
+	var index = gl_trasn_datos.save_id;
 	var selc_tx = "";
-	for (var j = indexfec;  j >= 0; j--) {
-		var fechalist = gl_trasn_save.fechalist[j];
-		selc_tx += "<option id='fech"+j+"' value='"+j+"'>"+fechalist+"</option>";
+	for (var j = index; j >= 0; j--) {
+		var name = gl_trasn_datos.fechalist[j]
+		if(name){
+			selc_tx += "<option id='fech"+j+"' value='"+j+"'>"+name+"</option>";
+		}
 	}
 	selec.innerHTML = selc_tx;
 	selec.setAttribute("onchange","selec_fechas('selchisfec');");
+
+
 	//selec.setAttribute("onclick","selec_fechas('selchisfec');");
 }
 
 var gl_total_day = 0;
-function selec_fechas(id) {
+function selec_fechas(id,mostrar = true) {
 	var secc_his = document.getElementById("hist_trans");
 	secc_his.innerHTML ="";
 	var selec = document.getElementById(id);
 	var current_opt = selec.options[selec.selectedIndex];
-	//console.log(current_opt.value);
-	//var count = gl_trasn_save.countfec[current_opt.value];
-	gl_total_day = 0;
-	if(current_opt){
-		var start = gl_trasn_save.indexstart[current_opt.value];
-		var end = gl_trasn_save.indexend[current_opt.value];
 
-		for (var j = start; start != null && j < (end+1); j++) {
-			//var index = gl_trasn_save.savindex[j];
-			gl_total_day += crear_historial(j);
-		}
+	gl_total_day = 0;
+	if(current_opt && mostrar){
+		gl_curr_optsel = parseInt(current_opt.value);
+		//console.log(gl_curr_optsel)
+		mostrar_selec(gl_curr_optsel);
+		//console.log(gl_curr_optsel+" opt  "+ gl_hist_save.index+" index "+gl_trasn_datos.index+  " index " +gl_trasn_datos.save_id+ " save id");
+
 	}
 
 	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
-	var result = get_mask("",gl_total_day,"("+selc_simb+")");
+
+	var in_rtran = document.getElementById("total_rt");
+	var result = get_mask("",get_dia_ganancia(),"("+selc_simb+")");
+	in_rtran.value = result;
+
+
 	var in_hist = document.getElementById("total_hist");
 	in_hist.value = result;
-	var in_rtran = document.getElementById("total_rt");
-	in_rtran.value = get_mask("",get_dia_ganancia(),"("+selc_simb+")");
 	
 }
 
@@ -48,30 +56,30 @@ function crear_historial(index) {
 
 	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
 
-	var hora = gl_trasn_save.hora[index];
-	var fecha = gl_trasn_save.fecha[index];
+	var hora = gl_hist_save.hora[index];
+	var fecha = gl_hist_save.fecha[index];
 
-	var simbd = gl_trasn_save.simbd[index];
-	var simbi = gl_trasn_save.simbi[index];
+	var simbd = gl_hist_save.simbd[index];
+	var simbi = gl_hist_save.simbi[index];
 
-	var tasa = gl_trasn_save.tasa[index];
-	var moneda = gl_trasn_save.moneda[index];
-	var mon_ustd = gl_trasn_save.mon_ustd[index];
-	var mon_ustdve = gl_trasn_save.mon_ustdve[index];
+	var tasa = gl_hist_save.tasa[index];
+	var moneda = gl_hist_save.moneda[index];
+	var mon_ustd = gl_hist_save.mon_ustd[index];
+	var mon_ustdve = gl_hist_save.mon_ustdve[index];
 
-	var total_ves = gl_trasn_save.total_ves[index];
-	var usdt_req = gl_trasn_save.usdt_req[index];
-	var mon_req = gl_trasn_save.mon_req[index];
-	var ganancia = gl_trasn_save.ganancia[index];
+	var total_ves = gl_hist_save.total_ves[index];
+	var usdt_req = gl_hist_save.usdt_req[index];
+	var mon_req = gl_hist_save.mon_req[index];
+	var ganancia = gl_hist_save.ganancia[index];
 
-	var estado = gl_trasn_save.estado[index];
+	var estado = gl_hist_save.estado[index];
 		
 	if(selc_simb==simbd){
 		var tx_tasa = "<li>Tasa: "+tasa+"</li>";
 		var tx_a = "<li>"+simbd+" Recibidos: "+get_mask("",moneda,"")+"</li>";
 		var tx_b = "<li>"+simbd+"/USTD : "+get_mask("",mon_ustd,"")+"</li>";
-		var tx_c = "<li>USTD Requeridos : "+get_mask("",usdt_req,"")+"</li>";
-		var tx_d = "<li>VES/USTD : "+get_mask("",mon_ustdve,"")+"</li>";
+		var tx_c = "<li>VES/USTD : "+get_mask("",mon_ustdve,"")+"</li>";
+		var tx_d = "<li>USTD Requeridos : "+get_mask("",usdt_req,"")+"</li>";
 		var tx_e = "<li>Total VES : "+get_mask("",total_ves,"")+"</li>";
 		var tx_f = "<li>"+simbd+" Requeridos: "+get_mask("",mon_req,"")+"</li>";
 		var tx_g = "<li>Ganancia : "+get_mask("",ganancia,"")+"</li>";
@@ -141,12 +149,12 @@ function button_detalles(index) {
 function button_quitar_hist(index) {
 	gl_trasn_save.estado[index] = "Eliminada";
 	add_transa(gl_trasn_save);
-selec_fechas("selchisfec");
+	selec_fechas("selchisfec");
 }
 function button_desh_hist(index) {
 	gl_trasn_save.estado[index] = "Realizada";
 	add_transa(gl_trasn_save);
-selec_fechas("selchisfec");
+	selec_fechas("selchisfec");
 }
 function preloder_selec_mon(id) {
 
@@ -199,11 +207,20 @@ function eliminar_todo(opt){
 	}
 }
 function clear_history(){
-	var gl_trasn_datos = new trasn_datos();
+
+	for (var j = 0; j <= gl_trasn_datos.save_id; j++) {
+		removerobjeto(j);
+	}
+	remove_temp(0);
+
+	gl_trasn_datos = new trasn_datos();
 	add_temp(gl_trasn_datos);
 
+	gl_hist_save =  new trasn_save();
+
 	gl_trasn_save = new trasn_save();
-	add_transa(gl_trasn_save);
+	//add_transa(gl_trasn_save);
+
 
 	preloder_filtro_fec();
 
