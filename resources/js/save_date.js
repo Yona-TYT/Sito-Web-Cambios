@@ -108,7 +108,7 @@ function mostrar_datos(clave) {
 
 function obtener_datos(evento) {
 	var hoy = new Date();
-	var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "--" + hoy.getFullYear();
+	var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
 	var index = gl_trasn_datos.index;
 	var fecha = gl_trasn_datos.fecha;
 	var curr_id = gl_trasn_datos.save_id;

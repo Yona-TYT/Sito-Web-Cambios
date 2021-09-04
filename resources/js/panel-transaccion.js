@@ -160,7 +160,7 @@ function guardar_trans_datos(){
 
 		var hoy = new Date();
 		var hora =  hoy.getHours() + ":" + hoy.getMinutes() + ":" + hoy.getSeconds();
-		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "--" + hoy.getFullYear();
+		var curr_fecha = hoy.getDate()+ "-" + ( hoy.getMonth() + 1 ) + "-" + hoy.getFullYear();
 
 		var fecha = gl_trasn_datos.fecha;
 
