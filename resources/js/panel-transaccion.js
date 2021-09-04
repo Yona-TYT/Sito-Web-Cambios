@@ -11,7 +11,6 @@ function int_trans(){
 
 	var input = document.getElementById("tasa_rt");
 	input.addEventListener("input", function(){
-
 		var input = document.getElementById("tasa_rt");
 		var valor = parseFloat(input.value)?parseFloat(input.value):0;
 		gl_trasn_datos.sel_tasa[gl_selmon] = valor;
@@ -60,6 +59,14 @@ function get_trans_datos(){
 	var moneda = (gl_trasn_datos.moneda[sel_nr]==null?0:gl_trasn_datos.moneda[sel_nr]);
 	var mon_ustd = (gl_trasn_datos.mon_ustd[sel_nr]==null?0:gl_trasn_datos.mon_ustd[sel_nr]);
 	var mon_ustdve = (gl_trasn_datos.mon_ustdve[sel_nr]==null?0:gl_trasn_datos.mon_ustdve[sel_nr]);
+
+	//Revisa el cuadro de tasa
+	var tas_input = document.getElementById("tasa_rt");
+	if(tasa==0){
+		tasa = parseFloat(tas_input.value)?parseFloat(tas_input.value):0;
+		gl_trasn_datos.sel_tasa[sel_nr] = tasa;
+	}	
+
 
 	//Obtenemos los inputs ESCRITURA ---------------------------------------
 	var input_a = document.getElementById("inputrt10");
