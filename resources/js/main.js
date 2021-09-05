@@ -239,7 +239,7 @@ window.addEventListener("keypress", function() {
 
 //console.log("key"+class_name);
 
-		if(class_name == "input_style_visible"){
+		if(class_name == "input_style_visible" || class_name == "mask_style"){
     		return soloNumeros(event);
 		}
 });

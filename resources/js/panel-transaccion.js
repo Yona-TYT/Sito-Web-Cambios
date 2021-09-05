@@ -14,11 +14,14 @@ function int_trans(){
 		var input = document.getElementById("tasa_rt");
 		var valor = parseFloat(input.value)?parseFloat(input.value):0;
 		gl_trasn_datos.sel_tasa[gl_selmon] = valor;
-		input.setAttribute("step", ""+(1*valor)+"");
+
+		//console.log(" len" +decim_len(valor)+"");	
+		input.setAttribute("step", ""+get_step(valor)+"");
 		//console.log(+input.value+"  " );
 		get_trans_datos();
 
 	});
+	input.addEventListener("focus", function(){el_selec("tasa_rt");});
 
 	create_table_rt();
 }
@@ -32,11 +35,11 @@ function selec_change_mo(id){
 
 	var val = (gl_trasn_datos.sel_tasa[index]==null?0:gl_trasn_datos.sel_tasa[index]);
 	var input = document.getElementById("tasa_rt");
-	input.setAttribute("step", ""+(1*val)+"");
+	input.setAttribute("step", ""+get_step(val)+"");
 	input.value = val;
 
 	var cv_input = document.getElementById("cv_tasa");
-	cv_input.setAttribute("step", ""+(1*val)+"");
+	cv_input.setAttribute("step", ""+get_step(val)+"");
 	cv_input.value = val;
 
 	get_trans_datos();

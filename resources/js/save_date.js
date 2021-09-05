@@ -90,7 +90,6 @@ function obtener_selec(evento) {
 		//console.log(" Index-" +gl_trasn_save.index+"");	
 		
 	}
-
 }
 //---------------------------------------------------------------------------------------
 
@@ -213,14 +212,6 @@ function trasn_datos() {
 function trasn_save() {
 	this.id = 0;
 
-	this.estado = new Array();
-
-	this.indexfec = 0;
-	this.fechalist = new Array();
-
-	this.indexstart = new Array();
-	this.indexend = new Array();
-
 	this.index = 0;
 
 	this.fecha = new Array();
@@ -239,5 +230,6 @@ function trasn_save() {
 	this.usdt_req = new Array();
 	this.mon_req = new Array();
 	this.ganancia = new Array();
+	this.estado = new Array();
 }
 //End

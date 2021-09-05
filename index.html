@@ -81,8 +81,8 @@
 				</div>
 				<div class="cajas_style">Tasa de Cambio: <input class="mask_style" type="number" oninput="resultado_conver();" id="cv_tasa" step="0.00000001" min="0" value="0"></div>
 				<div class="cajas_style">
-					Ingrese Monto: <input class="mask_style" type="number" oninput="resultado_conver();" id="cv_input_a" min="0,11" step="1" value="0,00">
-					Resultado: <input class="mask_style" type="text" id="cv_input_b" value="0,00" readonly>
+					Ingrese Monto: <input class="mask_style" type="number" oninput="resultado_conver();" id="cv_input_a" step="0.01" min="0" value="0.00">
+					Resultado: <input class="input_style_td" type="text" id="cv_input_b" value="0.00" readonly>
 				</div>
 				<datalist id="list_pesos"></datalist>
 				<datalist id="list_bsf"></datalist>
@@ -98,7 +98,7 @@
 				</div>
 				<div class="cajas_style">
 					Ganancia Total : 
-					<input class="input_style_td" type="text" id="total_hist">
+					<input class="input_style_td" type="text" id="total_hist" readonly>
 				</div>
 
 				<section  id="hist_trans"></section>

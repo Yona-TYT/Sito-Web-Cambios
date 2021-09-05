@@ -78,7 +78,7 @@ function create_table(){
 				if(i == 2 || i == 4){
 					input.setAttribute("step", "10");
 					input.setAttribute("min", "0.00");
-					input.setAttribute("lang", "en");
+					//input.setAttribute("lang", "en");
 
 					input.setAttribute("id", "input"+celda_id);
 					//para la mask del cuadro
@@ -199,8 +199,8 @@ function create_table(){
 					input.setAttribute("class","input_style_hidden");
 
 					input.setAttribute("step", "0.10");
-					input.setAttribute("min", "0.00");
-					input.setAttribute("lang", "en");
+					//input.setAttribute("min", "0.00");
+					//input.setAttribute("lang", "en");
 
 					//para la mask del cuadro
 					tex_mask.setAttribute("id", "text_mask"+celda_id);
@@ -358,7 +358,7 @@ function create_table_rt(){
 
 					input.setAttribute("step", "0.10");
 					input.setAttribute("min", "0.00");
-					input.setAttribute("lang", "en");
+					//input.setAttribute("lang", "en");
 
 					//para la mask del cuadro
 					tex_mask.setAttribute("id", "text_maskrt"+celda_id);
