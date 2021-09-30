@@ -1,7 +1,6 @@
 
 function menu_main(){
 
-
 	var select = document.getElementById("selectlistaname");
 	var opt = select.options[select.selectedIndex];
 	var input2 = document.getElementById("inputlistaname");
@@ -13,8 +12,6 @@ function menu_main(){
 		input2.setAttribute("class","mask_style");
 		select.setAttribute("class","element_style_hidden");
 	}
-
-
 	reset_inputs_rv();
 
 	document.getElementById("rv_totaldol").value = 0.00+" $";
@@ -49,7 +46,23 @@ function clonar_filtros(id) {
 	}
 }
 
+function mostrar_lista_menu(){
+	var lista = document.getElementById("menulist");
+	var class_name = lista.className;
+	if(class_name == "element_style_hidden")
+		lista.setAttribute("class","");
+	else
+		lista.setAttribute("class","element_style_hidden");
+}
+
 function visible_element(opt) {
+	var lista = document.getElementById("menulist");
+	lista.setAttribute("class","element_style_hidden");
+
+	//Cambia el titulo del al menu seleccionado
+	var title = document.getElementById("div_title");
+	var menu_opt = document.getElementById("menuopt"+opt);
+	title.innerHTML = menu_opt.innerHTML;
 
 	for(var j = 1; j<4;j++){
 		var bot_temp = document.getElementById("butopt"+j);
@@ -86,26 +99,6 @@ function visible_element(opt) {
 		historial.setAttribute("class","");
 	}
 }
-
-/*
-function buscar_reg_lista(text)
-{
-	var result = true;
-	for (var j = 2; j < table_fila; j++) {
-		//Obtine todas las columnas de nombres
-		var input = document.getElementById("input"+(1+save_id_filas[j])).value;
-		var fila = document.getElementById("fila"+j);
-		result = input.includes(text.toLowerCase());
-		if(!result){
-			fila.setAttribute("class","fila_style_hidden");
-		}
-		else{
-			fila.setAttribute("class","fila_style");
-		}
-		//gloval_test += "result:"+result+ " ";
-	}
-
-}*/
 
 function select_list_x(){
 
@@ -202,8 +195,8 @@ function preloder_selec_list(id) {
 	//selec.setAttribute("onclick","selec_fechas('selchisfec');");
 }
 
-function el_selec(id){
-	var elm = document.getElementById(id);
+function el_selec(){
+	var elm = document.activeElement;
 	elm.select();
 }
 
@@ -238,7 +231,7 @@ function ocultar_input()
 	var current_id_name = current_input.id;
 	var input_old = current_element;
 
-	el_selec(current_id_name);
+	el_selec();
 	if(input_old){
 		var id_name_old = input_old.id;
 		var id_mask_old = id_name_old.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto

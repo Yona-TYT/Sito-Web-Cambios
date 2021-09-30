@@ -19,9 +19,6 @@ function preloder_filtro_fec() {
 	}
 	selec.innerHTML = selc_tx;
 	selec.setAttribute("onchange","selec_fechas('selchisfec');");
-
-
-	//selec.setAttribute("onclick","selec_fechas('selchisfec');");
 }
 
 var gl_total_day = 0;
@@ -37,19 +34,15 @@ function selec_fechas(id,mostrar = true) {
 		//console.log(gl_curr_optsel)
 		mostrar_selec(gl_curr_optsel);
 		//console.log(gl_curr_optsel+" opt  "+ gl_hist_save.index+" index "+gl_trasn_datos.index+  " index " +gl_trasn_datos.save_id+ " save id");
-
 	}
-
 	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
 
 	var in_rtran = document.getElementById("total_rt");
 	var result = get_mask("",get_dia_ganancia(),"("+selc_simb+")");
 	in_rtran.value = result;
 
-
 	var in_hist = document.getElementById("total_hist");
 	in_hist.value = result;
-	
 }
 
 function crear_historial(index) {

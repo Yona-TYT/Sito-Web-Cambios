@@ -11,7 +11,7 @@
 .cajas_style {
 
 	display:var(--caja-disp);
-	margin:2px;
+	margin: 2px;
 }
 
 .table_style{
@@ -34,6 +34,40 @@
 
 	margin: 15% auto;
 	background-color: rgba(33, 159, 144, 0.7);
+}
+
+.menu_list_style {
+	display: block;
+
+	text-align: left;
+	font-weight: bold;
+	font-size:var(--siz-text);
+
+	color: #ffffff;
+	width: 200px;
+	height:var(--all-height);
+
+	border-width: var(--all-bord);
+	border-style: solid;
+	border-color: #fafafa;
+
+	background: rgba(55, 64, 145, 0.4);
+	overflow: hidden;
+}
+.menu_title_style {
+	display: var(--caja-disp);
+
+	text-align: left;
+	font-weight: bold;
+	font-size:var(--siz-text);
+
+	color: #ffffff;
+	width: 200px;
+	height:var(--all-height);
+
+	background: rgba(55, 64, 145, 0.4);
+
+	margin:2px;
 }
 
 .label_style {
@@ -438,6 +472,10 @@ tr, .fila_style:hover {
 	display: none;
 
 }
+.menu_list_style:hover {
+	background-color: rgba(206, 24, 30, 0.5);
+}
+
 .mask_style:hover {
 	background-color: rgba(206, 24, 30, 0.5);
 }

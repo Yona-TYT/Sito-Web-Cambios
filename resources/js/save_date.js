@@ -203,10 +203,10 @@ function trasn_datos() {
 	this.mon_ustdve = new Array();
 
 	//Control de trasn_save()
-	this.index = 0;			//Index actual (Va incrementando por operacion, regresa a 0 por dia)
-	this.fecha = null;		//Fecha actual
-	this.save_id = 0;		//ID actual (Va incrementando por dia)
-	this.fechalist = new Array(); //Lista de fechas por dia
+	this.index = 0;					//Index actual (Va incrementando por operacion, regresa a 0 por dia)
+	this.fecha = null;				//Fecha actual
+	this.save_id = 0;				//ID actual (Va incrementando por dia)
+	this.fechalist = new Array(); 	//Lista de fechas por dia
 }
 
 function trasn_save() {

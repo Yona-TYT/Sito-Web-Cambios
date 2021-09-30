@@ -31,17 +31,33 @@
 
 			<h1 class="input_style_td">Proyecto Monedas</h1>
 
-			<div class="cajas_style">
-				<button class="mask_style" type="button" id="butopt1" onclick="visible_element(1);">
-				Registro de Transacciones
+			<div class="input_style_hidden" id="allmenu">
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butmenu" onclick="mostrar_lista_menu();"> Menu </button>
+				</div>
+				<div class="menu_title_style" id="div_title">
+					Registro de Transacciones
+				</div>
+				<div class="input_style_hidden" id="menulist">
+					<button class='menu_list_style' type="button" id="menuopt1" onclick="visible_element(1);">Registro de Transacciones</button>
+					<button class='menu_list_style' type="button" id="menuopt2" onclick="visible_element(2);">Conversion Moneda</button>
+					<button class='menu_list_style' type="button" id="menuopt3" onclick="visible_element(3);">Historial de Transacciones</button>
+				</div>
 			</div>
-			<div class="cajas_style">
-				<button class="mask_style" type="button" id="butopt2" onclick="visible_element(2);">
-				Conversion Moneda
-			</div>
-			<div class="cajas_style">
-				<button class="mask_style" type="button" id="butopt3" onclick="visible_element(3);">
-				Historial de Transacciones
+
+			<div class="input_style_hidden" id="allbutons">
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butopt1" onclick="visible_element(1);">
+					Registro de Transacciones
+				</div>
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butopt2" onclick="visible_element(2);">
+					Conversion Moneda
+				</div>
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butopt3" onclick="visible_element(3);">
+					Historial de Transacciones
+				</div>
 			</div>
 
 			<! ---------------- Seccion1 Registro de Transacciones ------------------>
@@ -79,9 +95,9 @@
 
 					</select>
 				</div>
-				<div class="cajas_style">Tasa de Cambio: <input class="mask_style" type="number" oninput="resultado_conver();" id="cv_tasa" step="0.00000001" min="0" value="0"></div>
+				<div class="cajas_style">Tasa de Cambio: <input class="mask_style" type="number" oninput="resultado_conver();" onfocus="el_selec();" id="cv_tasa" step="0.00000001" min="0" value="0"></div>
 				<div class="cajas_style">
-					Ingrese Monto: <input class="mask_style" type="number" oninput="resultado_conver();" id="cv_input_a" step="0.01" min="0" value="0.00">
+					Ingrese Monto: <input class="mask_style" type="number" oninput="resultado_conver();" onfocus="el_selec();" id="cv_input_a" step="0.01" min="0" value="0.00">
 					Resultado: <input class="input_style_td" type="text" id="cv_input_b" value="0.00" readonly>
 				</div>
 				<datalist id="list_pesos"></datalist>

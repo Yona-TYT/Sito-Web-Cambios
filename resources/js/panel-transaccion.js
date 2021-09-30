@@ -21,7 +21,7 @@ function int_trans(){
 		get_trans_datos();
 
 	});
-	input.addEventListener("focus", function(){el_selec("tasa_rt");});
+	input.addEventListener("focus", el_selec);
 
 	create_table_rt();
 }

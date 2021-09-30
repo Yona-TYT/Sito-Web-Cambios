@@ -7,8 +7,14 @@ function check_windows_siz() {
 	var objref = document.body
 	var font_siz = getComputedStyle(objref).getPropertyValue("--siz-text");
 
-	if(!gl_mobil){
-		if(ancho < 1024){
+	//Muestra y oculto los menus
+	var menu_list = document.getElementById("allmenu");
+	var menu_butt = document.getElementById("allbutons");
+
+	if(ancho < 1024){
+		menu_list.setAttribute("class","");
+		menu_butt.setAttribute("class","element_style_hidden");	
+		if(!gl_mobil) {
 			//console.log(+ancho+"  " +font_siz);
 			objref.style.setProperty("--alig-text", 'left');
 			objref.style.setProperty("--cel-siz", '35%');
@@ -17,6 +23,8 @@ function check_windows_siz() {
 		}
 	}
 	else if(ancho >= 1024) {
+		menu_butt.setAttribute("class","");
+		menu_list.setAttribute("class","element_style_hidden");
 		//console.log(+ancho+"  " +font_siz);
 		objref.style.setProperty("--alig-text", 'center');
 		objref.style.setProperty("--cel-siz", 'auto');
