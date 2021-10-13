@@ -11,15 +11,33 @@ function mostrarerror(evento) {
 	alert("Error: tyt tyt " + evento.code + " " + evento.message);
 }
 function comenzar(evento) {
-	var selec = document.getElementById("selc_monert");
-	var current_select = selec.options[selec.selectedIndex].value;
+	var selec_a = document.getElementById("selc_mone_a");
+	var selec_b = document.getElementById("selc_mone_b");
 
-	gl_selmon = parseInt(current_select);
+	var inx_a = selec_a.options[selec_a.selectedIndex].value;
+	var inx_b = selec_b.options[selec_b.selectedIndex].value;
+
+	gl_selmon_a = inx_a;
+	gl_selmon_b = inx_a;
 
 	bd = evento.target.result;
 
 	gl_trasn_datos = new trasn_datos();
+
+	console.log(" Aqui " );
+	var siz = gl_trasn_datos.sel_simbd.length;
+	for (var j = 0; j < siz; j++) {
+		var vlu = new Array();
+		for (var i = 0; i < siz; i++) {
+			vlu[i] = 0;
+			gl_trasn_datos.sel_tasa[j] = vlu;
+		}
+	}
+
+
 	gl_trasn_save = new trasn_save();
+
+
 
 	mostrar_temp(0);
 
@@ -82,7 +100,7 @@ function obtener_selec(evento) {
 			//var index = gl_trasn_save.savindex[j];
 			gl_total_day += crear_historial(j);
 		}
-		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
+		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon_a];
 		var result = get_mask("",gl_total_day,"("+selc_simb+")");
 		var in_hist = document.getElementById("total_hist");
 		in_hist.value = result;
@@ -179,13 +197,15 @@ function obtener_temp(evento) {
 		gl_trasn_datos = resultado.tmpdatos;
 		gl_curr_optsel = gl_trasn_datos.save_id;
 
+		selec_change_mo();
+
 		var input = document.getElementById("tasa_rt");
-		var valor = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon])?parseFloat(gl_trasn_datos.sel_tasa[gl_selmon]):0;
+		var valor = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b])?parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]):0;
 		input.value = valor;
 
 		//console.log(""+gl_trasn_datos.save_id+" index");
 		mostrar_datos(gl_curr_optsel);
-	}
+	}	
 }
 
 //---------------------------------------------------------------------------
@@ -195,8 +215,8 @@ function trasn_datos() {
 
 	this.sel_money = new Array();
 	this.sel_tasa =  new Array();
-	this.sel_simbd = ["COP", "ARS"];
-	this.sel_simbi = ["$", "$"];
+	this.sel_simbd = ["COP", "ARS", "VES"];
+	this.sel_simbi = ["$", "$", "Bs"];
 
 	this.moneda = new Array();
 	this.mon_ustd = new Array();

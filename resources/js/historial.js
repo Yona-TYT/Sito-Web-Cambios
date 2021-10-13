@@ -3,7 +3,7 @@ gl_hist_save = new trasn_save();
 
 function int_history() {
 	preloder_filtro_fec();
-	preloder_selec_mon("selc_monert");
+	preloder_selec_mon("selc_mone_a");
 }
 
 function preloder_filtro_fec() {
@@ -35,7 +35,7 @@ function selec_fechas(id,mostrar = true) {
 		mostrar_selec(gl_curr_optsel);
 		//console.log(gl_curr_optsel+" opt  "+ gl_hist_save.index+" index "+gl_trasn_datos.index+  " index " +gl_trasn_datos.save_id+ " save id");
 	}
-	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
+	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon_a];
 
 	var in_rtran = document.getElementById("total_rt");
 	var result = get_mask("",get_dia_ganancia(),"("+selc_simb+")");
@@ -47,7 +47,7 @@ function selec_fechas(id,mostrar = true) {
 
 function crear_historial(index) {
 
-	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
+	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon_a];
 
 	var hora = gl_hist_save.hora[index];
 	var fecha = gl_hist_save.fecha[index];
@@ -151,32 +151,10 @@ function button_desh_hist(index) {
 }
 function preloder_selec_mon(id) {
 
-	var selec = document.getElementById(id);
-	var sel_a = document.getElementById("selc_monehi");
-
-	var selc_tx = selec.innerHTML;
-
-	sel_a.innerHTML = selc_tx;
-
-
-	selec.options[gl_selmon].selected=true;
-	sel_a.options[gl_selmon].selected=true;
 
 }
 function preloder_selec_mohi() {
 
-	var selec = document.getElementById("selc_monehi");
-	var sel_a = document.getElementById("selc_monert");
-	var selc_tx = selec.innerHTML;
-	sel_a.innerHTML = selc_tx;
-
-	selec_change_mo("selc_monehi");
-
-
-	selec.options[gl_selmon].selected=true;
-	sel_a.options[gl_selmon].selected=true;
-
-	selec_fechas('selchisfec');
 }
 
 function eliminar_todo(opt){
@@ -217,7 +195,7 @@ function clear_history(){
 
 	preloder_filtro_fec();
 
-	preloder_selec_mon("selc_monert");
+	preloder_selec_mon("selc_mone_a");
 	selec_fechas("selchisfec");
 }
 

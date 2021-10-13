@@ -1,10 +1,18 @@
-var gl_selmon = 0;
+var gl_selmon_a = 0;
+var gl_selmon_b = 0;
 
 function int_trans(){
 	//Selecciona el tipo de moneda
-	var selec = document.getElementById("selc_monert");
+	var selec = document.getElementById("selc_mone_a");
 	selec.addEventListener("change", function(){
-		selec_change_mo("selc_monert");
+		selec_change_mo();
+		selec_fechas('selchisfec');
+
+	});
+
+	var selec = document.getElementById("selc_mone_b");
+	selec.addEventListener("change", function(){
+		selec_change_mo();
 		selec_fechas('selchisfec');
 
 	});
@@ -13,7 +21,7 @@ function int_trans(){
 	input.addEventListener("input", function(){
 		var input = document.getElementById("tasa_rt");
 		var valor = parseFloat(input.value)?parseFloat(input.value):0;
-		gl_trasn_datos.sel_tasa[gl_selmon] = valor;
+		gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b] = valor;
 
 		//console.log(" len" +decim_len(valor)+"");	
 		input.setAttribute("step", ""+get_step(valor)+"");
@@ -26,14 +34,35 @@ function int_trans(){
 	create_table_rt();
 }
 
-function selec_change_mo(id){
-	var selec = document.getElementById(id);
-	var index = selec.options[selec.selectedIndex].value;
-	index = parseInt(index)?parseInt(index):0;
-	gl_selmon = index;
-	preloder_selec_mon("selc_monert");
+function selec_change_mo(){
+	var selec_a = document.getElementById("selc_mone_a");
+	var selec_b = document.getElementById("selc_mone_b");
 
-	var val = (gl_trasn_datos.sel_tasa[index]==null?0:gl_trasn_datos.sel_tasa[index]);
+	var inx_a = selec_a.options[selec_a.selectedIndex].value;
+	var inx_b = selec_b.options[selec_b.selectedIndex].value;
+
+	for (var j = 0; j < gl_trasn_datos.sel_simbd.length; j++) {
+		if(j == inx_a){
+			if(j == inx_b)
+				selec_b.options[3].selected=true;
+			selec_b.options[j].setAttribute("class", "input_style_hidden");
+		}
+		else
+			selec_b.options[j].setAttribute("class", "");
+	}
+
+	gl_selmon_a = inx_a;
+	gl_selmon_b = inx_b;
+
+	var inp_nam_a = document.getElementById("inputrt02");
+	var inp_nam_b = document.getElementById("inputrt04");
+	var simb = gl_trasn_datos.sel_simbd[gl_selmon_b];
+	if(simb){
+		inp_nam_a.value = ""+simb+"/USDT";
+		inp_nam_b.value = "Total "+simb;
+	}
+
+	var val = gl_trasn_datos.sel_tasa[inx_a][inx_b];
 	var input = document.getElementById("tasa_rt");
 	input.setAttribute("step", ""+get_step(val)+"");
 	input.value = val;
@@ -50,24 +79,22 @@ var gl_trasn_datos = new trasn_datos();
 var gl_trasn_save = new trasn_save();
 
 function get_trans_datos(){
-	var selec = document.getElementById("selc_monert");
-	var inx_val = selec.options[selec.selectedIndex].value;
-	var	sel_nr = parseInt(inx_val)?parseInt(inx_val):0;
-
 	//Iniciar areglos
-	var tasa = (gl_trasn_datos.sel_tasa[sel_nr]==null?0:gl_trasn_datos.sel_tasa[sel_nr]);
-	var simbd = gl_trasn_datos.sel_simbd[sel_nr];
-	var simbi = gl_trasn_datos.sel_simbi[sel_nr];
+	var tasa = gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b];
+	var simbd_a = gl_trasn_datos.sel_simbd[gl_selmon_a];
+	var simbi_a = gl_trasn_datos.sel_simbi[gl_selmon_a];
+	var simbd_b = gl_trasn_datos.sel_simbd[gl_selmon_b];
+	var simbi_b = gl_trasn_datos.sel_simbi[gl_selmon_b];
 
-	var moneda = (gl_trasn_datos.moneda[sel_nr]==null?0:gl_trasn_datos.moneda[sel_nr]);
-	var mon_ustd = (gl_trasn_datos.mon_ustd[sel_nr]==null?0:gl_trasn_datos.mon_ustd[sel_nr]);
-	var mon_ustdve = (gl_trasn_datos.mon_ustdve[sel_nr]==null?0:gl_trasn_datos.mon_ustdve[sel_nr]);
+	var moneda = (gl_trasn_datos.moneda[gl_selmon_a]==null?0:gl_trasn_datos.moneda[gl_selmon_a]);
+	var mon_ustd = (gl_trasn_datos.mon_ustd[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustd[gl_selmon_a]);
+	var mon_ustdve = (gl_trasn_datos.mon_ustdve[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustdve[gl_selmon_a]);
 
 	//Revisa el cuadro de tasa
 	var tas_input = document.getElementById("tasa_rt");
 	if(tasa==0){
 		tasa = parseFloat(tas_input.value)?parseFloat(tas_input.value):0;
-		gl_trasn_datos.sel_tasa[sel_nr] = tasa;
+		gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b] = tasa;
 	}	
 
 
@@ -81,18 +108,47 @@ function get_trans_datos(){
 	var val_c = parseFloat(input_c.value)?parseFloat(input_c.value):0;
 
 	//Guarda los valores
-	gl_trasn_datos.moneda[sel_nr] = val_a;
-	gl_trasn_datos.mon_ustd[sel_nr] = val_b;
-	gl_trasn_datos.mon_ustdve[sel_nr] = val_c;
+	gl_trasn_datos.moneda[gl_selmon_a] = val_a;
+	gl_trasn_datos.mon_ustd[gl_selmon_a] = val_b;
+	gl_trasn_datos.mon_ustdve[gl_selmon_a] = val_c;
 
 	add_temp(gl_trasn_datos);
 	
 	//------------------------------------------------------------------------
 	//Calculos de datos--------------------------------------
-	var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
-	var total_ves = 0; //Total VES
-	if(selc_simb == "ARS") total_ves = val_a*tasa;
-	if(selc_simb == "COP") total_ves = val_a/tasa;
+	var total_ves = 0; 	//Total Moneda a Calcular
+
+	//console.log(" Tasa: "+ tasa+" a: "+gl_selmon_a+" b: "+gl_selmon_b);
+	//COP
+	if(gl_selmon_a == 0){
+	 	if(gl_selmon_b == 1){
+			//return alert("No disponible!.");
+		}
+		else if(gl_selmon_b == 2){
+			//total_ves = moneda/tasa;
+		}
+	}
+
+	//ARS
+	else if(gl_selmon_a == 1){
+		if(gl_selmon_b == 0){
+			//return alert("No disponible!.");
+		}
+
+		else if(gl_selmon_b == 2){
+			total_ves = moneda*tasa;
+		}
+	}
+
+	//VES
+	else if(gl_selmon_a == 2){
+		if(gl_selmon_b == 0){
+			//return alert("No disponible!.");
+		}
+		else if(gl_selmon_b == 1){
+			//return alert("No disponible!.");
+		}
+	}
 
 	var usdt_req = total_ves/val_c; //USDT requeridos
 	var mon_req = val_b*usdt_req //Requeridos (Moneda)
@@ -105,9 +161,9 @@ function get_trans_datos(){
 	var input_g = document.getElementById("inputrt16");
 
 	input_d.value = get_mask("", usdt_req, "(USDT)");
-	input_e.value = get_mask("", total_ves, "VES");
-	input_f.value = get_mask(simbi, mon_req, "");
-	input_g.value = get_mask(simbi, ganancia, "");
+	input_e.value = get_mask("", total_ves, ""+simbd_b+"");
+	input_f.value = get_mask(simbi_a, mon_req, "");
+	input_g.value = get_mask(simbi_a, ganancia, "");
 
 	//------------------------------------------------------------------------
 	//Obtenemos los inputs LECTURA DE MASK MONEDA
@@ -116,9 +172,9 @@ function get_trans_datos(){
 	var mask_c = document.getElementById("text_maskrt12");
 
 
-	mask_a.value = get_mask(simbi, input_a.value, "("+simbd+")");
-	mask_b.value = get_mask("", input_b.value, "("+simbd+"/USDT)");
-	mask_c.value = get_mask("", input_c.value, "(VES/USDT)");
+	mask_a.value = get_mask(simbi_a, input_a.value, "("+simbd_a+")");
+	mask_b.value = get_mask("", input_b.value, "("+simbd_a+"/USDT)");
+	mask_c.value = get_mask("", input_c.value, "("+simbd_b+"/USDT)");
 
 }
 
@@ -143,29 +199,61 @@ function resultado_conver(){
 
 function guardar_trans_datos(){
 	//Iniciar areglos
-	var tasa = (gl_trasn_datos.sel_tasa[gl_selmon]==null?0:gl_trasn_datos.sel_tasa[gl_selmon]);
-	var simbd = gl_trasn_datos.sel_simbd[gl_selmon];
-	var simbi = gl_trasn_datos.sel_simbi[gl_selmon];
+	var tasa = gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b];
+	var simbd = gl_trasn_datos.sel_simbd[gl_selmon_a];
+	var simbi = gl_trasn_datos.sel_simbi[gl_selmon_a];
 
-	var moneda = (gl_trasn_datos.moneda[gl_selmon]==null?0:gl_trasn_datos.moneda[gl_selmon]);
-	var mon_ustd = (gl_trasn_datos.mon_ustd[gl_selmon]==null?0:gl_trasn_datos.mon_ustd[gl_selmon]);
-	var mon_ustdve = (gl_trasn_datos.mon_ustdve[gl_selmon]==null?0:gl_trasn_datos.mon_ustdve[gl_selmon]);
+	var moneda = (gl_trasn_datos.moneda[gl_selmon_a]==null?0:gl_trasn_datos.moneda[gl_selmon_a]);
+	var mon_ustd = (gl_trasn_datos.mon_ustd[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustd[gl_selmon_a]);
+	var mon_ustdve = (gl_trasn_datos.mon_ustdve[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustdve[gl_selmon_a]);
+
+	if(gl_selmon_b == 3) return alert("Tipo de Moneda Esata Vacio!.");
 
 	if(moneda !=0 && mon_ustd !=0 && mon_ustdve !=0 && tasa !=0){
 		//Calculos de datos--------------------------------------
-		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
-		var total_ves = 0; //Total VES
-		if(selc_simb == "ARS") total_ves = moneda*tasa;
-		if(selc_simb == "COP") total_ves = moneda/tasa;
+		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon_a];
+		var total_ves = 0; 	//Total Moneda a Calcular
+
+		//console.log(" Tasa: "+ tasa+" a: "+gl_selmon_a+" b: "+gl_selmon_b);
+		//COP
+		if(gl_selmon_a == 0){
+		 	if(gl_selmon_b == 1){
+				return alert("No disponible!.");
+			}
+			else if(gl_selmon_b == 2){
+				total_ves = moneda/tasa;
+			}
+		}
+
+		//ARS
+		else if(gl_selmon_a == 1){
+			if(gl_selmon_b == 0){
+				return alert("No disponible!.");
+			}
+
+			else if(gl_selmon_b == 2){
+				total_ves = moneda*tasa;
+			}
+		}
+
+		//VES
+		else if(gl_selmon_a == 2){
+			if(gl_selmon_b == 0){
+				return alert("No disponible!.");
+			}
+			else if(gl_selmon_b == 1){
+				return alert("No disponible!.");
+			}
+		}
 		
-		var usdt_req = total_ves/mon_ustdve; //USDT requeridos
-		var mon_req = mon_ustd*usdt_req //Requeridos (Moneda)
-		var ganancia = moneda-mon_req //Ganancia
+		var usdt_req = total_ves/mon_ustdve; 	//USDT requeridos
+		var mon_req = mon_ustd*usdt_req 		//Requeridos (Moneda)
+		var ganancia = moneda-mon_req 			//Ganancia
 
 		//Reinici los valores------------------------------------
-		gl_trasn_datos.moneda[gl_selmon] = 0;
-		gl_trasn_datos.mon_ustd[gl_selmon] = 0;
-		gl_trasn_datos.mon_ustdve[gl_selmon] = 0;
+		gl_trasn_datos.moneda[gl_selmon_a] = 0;
+		gl_trasn_datos.mon_ustd[gl_selmon_a] = 0;
+		gl_trasn_datos.mon_ustdve[gl_selmon_a] = 0;
 		reset_all_inputs();
 
 		var hoy = new Date();
@@ -224,7 +312,7 @@ function get_dia_ganancia(){
 	var result = 0;
 	var index = gl_trasn_datos.index;
 	for (var j = 0; j <= index; j++) {
-		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon];
+		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon_a];
 		var simbd = gl_trasn_save.simbd[j];
 		var ganancia = gl_trasn_save.ganancia[j];
 		var estado = gl_trasn_save.estado[j];

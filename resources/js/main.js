@@ -233,8 +233,13 @@ function soltar_tecla(e){
 }
 function remplace_test(num) {
 	//num = num.replace(/(\.)(\d){2,}/g, 128);
-	 num = num.replace(/($)/g, ".00");
 
+	console.log("vlu "+num);
+	if(num == "")	
+		num = num.replace(/($)/g, "1.00");
+	else{
+		num = num.replace(/($)/, ".00");
+	}
 	return num;
 }
 

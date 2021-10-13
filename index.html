@@ -60,29 +60,45 @@
 				</div>
 			</div>
 
-			<! ---------------- Seccion1 Registro de Transacciones ------------------>
-
-			<section  id="seccion1">
-				<div class="cajas_style">Seleccione Moneda: 
-					<select class="mask_style" id="selc_monert" >
-						<option id="money0" value="0">COP</option>
-						<option id="money1" value="1">ARS</option>
+			<! ---------------- Seccion Siempre Visible ------------------>
+			<section class="label_style" id="seccion_fija">
+				<div class="cajas_style">Seleccione Moneda 1: 
+					<select class="mask_style" id="selc_mone_a" >
+						<option value="0">COP</option>
+						<option value="1">ARS</option>
+						<option value="2">VES</option>
 					</select>
 				</div>
-
-				<div class="cajas_style">
-
+				<div class="cajas_style">Seleccione Moneda 2: 
+					<select class="mask_style" id="selc_mone_b" >
+						<option value="0">COP</option>
+						<option value="1">ARS</option>
+						<option value="2">VES</option>
+						<option value="3">Vacio</option>
+					</select>
 				</div>
 				<div class="cajas_style">
 					Tasa (Moneda Seleccionada): 
 					<input class="mask_style" type="number" step="0.00000001" min="0" id="tasa_rt">
+				</div>
+			</section>
+
+			<! ---------------- Seccion1 Registro de Transacciones ------------------>
+
+			<section  id="seccion1">
+				<div class="cajas_style">
+
+				</div>
+				<div class="cajas_style">
 					Total Diario (Moneda Seleccionada): 
 					<input class="input_style_td" type="text" id="total_rt" readonly>
 				</div>
 
 				<section id="sect_rt"></section>
 
-				<div class="cajas_style"><button class="mask_style" type="button" id="butt_regrt" onclick="guardar_trans_datos();">Registrar</button></div>
+				<div class="cajas_style">
+					<button class="mask_style" type="button" id="butt_regrt" onclick="guardar_trans_datos();">Registrar</button>
+				</div>
 			</section>
 			<! ------- Seccion2 Conversiones moneda ------------- >
 			<section  id="seccion2">
@@ -108,9 +124,6 @@
 			<section  id="seccion3">
 				<div class="cajas_style">Seleccione Fecha: 
 					<select class="mask_style" id="selchisfec"></select>
-				</div>
-				<div class="cajas_style">Seleccione Moneda: 
-					<select class="mask_style" id="selc_monehi" onchange = "preloder_selec_mohi();"></select>
 				</div>
 				<div class="cajas_style">
 					Ganancia Total : 

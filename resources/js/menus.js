@@ -245,4 +245,14 @@ function ocultar_input()
 		}
 	}
 }
+function tasa_selector(){
+	var selec_a = document.getElementById("selc_mone_a");
+	var selec_b = document.getElementById("selc_mone_b");
+
+	var inx_a = selec_a.options[selec_a.selectedIndex].value;
+	var inx_b = selec_b.options[selec_b.selectedIndex].value;
+
+	gl_trasn_datos.sel_tasa[inx_a][inx_b];
+}
+
 
