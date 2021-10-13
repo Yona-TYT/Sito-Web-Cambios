@@ -104,7 +104,6 @@ function selec_change_mo(){
 	get_trans_datos();
 }
 
-
 var gl_trasn_datos = new trasn_datos();
 var gl_trasn_save = new trasn_save();
 
@@ -187,9 +186,8 @@ function get_trans_datos(){
 			//return alert("No disponible!.");
 		}
 	}
-	console.log(" Tasa: "+ tasa+" a: "+gl_selmon_a+" b: "+gl_selmon_b);
-	console.log(" mon_ustd: "+ mon_ustd+" usdt_req: "+usdt_req+" b: "+gl_selmon_b);
-
+	//console.log(" Tasa: "+ tasa+" a: "+gl_selmon_a+" b: "+gl_selmon_b);
+	//console.log(" mon_ustd: "+ mon_ustd+" usdt_req: "+usdt_req+" b: "+gl_selmon_b);
 
 	var ganancia = moneda-mon_req //Ganancia
 
@@ -202,7 +200,7 @@ function get_trans_datos(){
 	input_d.value = get_mask("", usdt_req, "(USDT)");
 	input_e.value = get_mask("", total_tranf, ""+simbd_b+"");
 	input_f.value = get_mask(simbi_a, mon_req, "");
-	input_g.value = get_mask(simbi_a, ganancia, "");
+	input_g.value = get_mask(simbi_a, ganancia, "")+" ("+get_mask_simple((ganancia/moneda*100), "%")+")";
 
 	//------------------------------------------------------------------------
 	//Obtenemos los inputs LECTURA DE MASK MONEDA
