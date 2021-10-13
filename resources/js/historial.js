@@ -187,6 +187,7 @@ function clear_history(){
 	remove_temp(0);
 
 	gl_trasn_datos = new trasn_datos();
+	int_save();
 	add_temp(gl_trasn_datos);
 
 	gl_hist_save =  new trasn_save();

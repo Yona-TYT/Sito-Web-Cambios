@@ -26,6 +26,77 @@ var gloval_test = "";
 //Test lista de productos
 var gl_selc = 0;
 
+
+
+function butt_actu_test(){
+
+	var new_trasn_datos = new trasn_datos();
+	var new_trasn_save = new trasn_save();
+
+
+	var selec_a = document.getElementById("selc_mone_a");
+	var selec_b = document.getElementById("selc_mone_b");
+
+	var inx_a = selec_a.options[selec_a.selectedIndex].value;
+	var inx_b = selec_b.options[selec_b.selectedIndex].value;
+
+	var siz = new_trasn_datos.sel_simbd.length;
+	for (var j = 0; j < siz; j++) {
+		var vlu_a = new Array();
+		var vlu_b = new Array();
+		var vlu_c = new Array();
+		var vlu_d = new Array();
+		for (var i = 0; i < siz; i++) {
+			vlu_a[i] = 0;
+			vlu_b[i] = 0;
+			vlu_c[i] = 0;
+			vlu_d[i] = 0;
+			new_trasn_datos.sel_tasa[j] = vlu_a;
+			new_trasn_datos.moneda[j] = vlu_b;
+			new_trasn_datos.mon_ustd[j] = vlu_c;
+			new_trasn_datos.mon_ustdve[j] = vlu_d;
+
+		}
+	}
+
+	//Control de trasn_save()
+	new_trasn_datos.index = gl_trasn_datos.index;				//Index actual (Va incrementando por operacion, regresa a 0 por dia)
+	new_trasn_datos.fecha = gl_trasn_datos.fecha;				//Fecha actual
+	new_trasn_datos.save_id = gl_trasn_datos.save_id;			//ID actual (Va incrementando por dia)
+	new_trasn_datos.fechalist = gl_trasn_datos.fechalist; 		//Lista de fechas por dia
+
+	add_temp(new_trasn_datos);
+
+	new_trasn_save.id = gl_trasn_save.id;
+
+	new_trasn_save.index = gl_trasn_save.index;
+
+	new_trasn_save.fecha = gl_trasn_save.fecha;
+	new_trasn_save.hora = gl_trasn_save.hora;
+
+	new_trasn_save.simbd_a = new Array();
+	new_trasn_save.simbi_a = new Array();
+
+	new_trasn_save.simbd_b = new Array();
+	new_trasn_save.simbi_b = new Array();
+
+
+	new_trasn_save.tasa = gl_trasn_save.tasa;
+	new_trasn_save.moneda = gl_trasn_save.moneda;
+	new_trasn_save.mon_ustd = gl_trasn_save.mon_ustd;
+	new_trasn_save.mon_ustdve = gl_trasn_save.mon_ustdve;
+
+	new_trasn_save.total_ves = gl_trasn_save.total_ves;
+	new_trasn_save.usdt_req = gl_trasn_save.usdt_req;
+	new_trasn_save.mon_req = gl_trasn_save.mon_req;
+	new_trasn_save.ganancia = gl_trasn_save.ganancia;
+	new_trasn_save.estado = gl_trasn_save.estado;
+
+	add_transa(new_trasn_save);
+
+}
+
+
 var start_one = true;
 var is_start = true;
 function load_save_data(){
@@ -120,13 +191,17 @@ function cursor_no_button(id)
 function init(){
 	check_windows_siz();
 
+	//int_save();
+
 	set_basededatos("basededato");
+
 
 
 	//Solo visible la tabla de lista
  	visible_element(1);
 
 	int_trans();
+
 	int_history();
 
 	var boton = document.getElementById("load_start");

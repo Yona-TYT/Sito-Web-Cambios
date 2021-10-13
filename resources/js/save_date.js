@@ -1,16 +1,4 @@
-
-function set_basededatos(name)
-{
-	var solicitud = indexedDB.open(name, 1);
-	solicitud.addEventListener("error", mostrarerror);
-	solicitud.addEventListener("success", comenzar);
-	solicitud.addEventListener("upgradeneeded", crearbd);
-}
-
-function mostrarerror(evento) {
-	alert("Error: tyt tyt " + evento.code + " " + evento.message);
-}
-function comenzar(evento) {
+function int_save(){
 	var selec_a = document.getElementById("selc_mone_a");
 	var selec_b = document.getElementById("selc_mone_b");
 
@@ -19,8 +7,6 @@ function comenzar(evento) {
 
 	gl_selmon_a = inx_a;
 	gl_selmon_b = inx_a;
-
-	bd = evento.target.result;
 
 	gl_trasn_datos = new trasn_datos();
 
@@ -43,18 +29,28 @@ function comenzar(evento) {
 
 		}
 	}
+}
 
+
+function set_basededatos(name)
+{
+	var solicitud = indexedDB.open(name, 1);
+	solicitud.addEventListener("error", mostrarerror);
+	solicitud.addEventListener("success", comenzar);
+	solicitud.addEventListener("upgradeneeded", crearbd);
+}
+
+function mostrarerror(evento) {
+	alert("Error: tyt tyt " + evento.code + " " + evento.message);
+}
+function comenzar(evento) {
+	int_save();
+
+	bd = evento.target.result;
 
 	gl_trasn_save = new trasn_save();
 
-
-
 	mostrar_temp(0);
-
-	//gl_curr_optsel = gl_trasn_datos.save_id;
-	//mostrar_datos(0);
-	//mostrar_selec();
-
 }
 
 function crearbd(evento) {
@@ -203,9 +199,13 @@ function mostrar_temp(clave) {
 
 function obtener_temp(evento) {
 	var resultado = evento.target.result;
+
 	if(resultado){
+
 		gl_trasn_datos = resultado.tmpdatos;
 		gl_curr_optsel = gl_trasn_datos.save_id;
+
+		//console.log("  Selc: "+ gl_trasn_datos.sel_tasa[0][0]);
 
 		selec_change_mo();
 
@@ -217,14 +217,9 @@ function obtener_temp(evento) {
 		var input_b = document.getElementById("inputrt11");
 		var input_c = document.getElementById("inputrt12");
 
-
-
 		input_a.value = gl_trasn_datos.moneda[gl_selmon_a][gl_selmon_b];
 		input_b.value = gl_trasn_datos.mon_ustd[gl_selmon_a][gl_selmon_b];
 		input_c.value = gl_trasn_datos.mon_ustdve[gl_selmon_a][gl_selmon_b];
-
-
-
 
 		//console.log(""+gl_trasn_datos.save_id+" index");
 		mostrar_datos(gl_curr_optsel);

@@ -35,6 +35,8 @@ function int_trans(){
 }
 
 function selec_change_mo(){
+
+
 	var selec_a = document.getElementById("selc_mone_a");
 	var selec_b = document.getElementById("selc_mone_b");
 
@@ -242,53 +244,53 @@ function guardar_trans_datos(){
 	var simbd_b = gl_trasn_datos.sel_simbd[gl_selmon_b];
 	var simbi_b = gl_trasn_datos.sel_simbi[gl_selmon_b];
 
-	var moneda = (gl_trasn_datos.moneda[gl_selmon_a]==null?0:gl_trasn_datos.moneda[gl_selmon_a]);
-	var mon_ustd = (gl_trasn_datos.mon_ustd[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustd[gl_selmon_a]);
-	var mon_ustdve = (gl_trasn_datos.mon_ustdve[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustdve[gl_selmon_a]);
+	var moneda = (gl_trasn_datos.moneda[gl_selmon_a][gl_selmon_b]==null?0:gl_trasn_datos.moneda[gl_selmon_a][gl_selmon_b]);
+	var mon_ustd = (gl_trasn_datos.mon_ustd[gl_selmon_a][gl_selmon_b]==null?0:gl_trasn_datos.mon_ustd[gl_selmon_a][gl_selmon_b]);
+	var mon_ustdve = (gl_trasn_datos.mon_ustdve[gl_selmon_a][gl_selmon_b]==null?0:gl_trasn_datos.mon_ustdve[gl_selmon_a][gl_selmon_b]);
 
 	if(gl_selmon_b == 3) return alert("Tipo de Moneda Esata Vacio!.");
 
 	if(moneda !=0 && mon_ustd !=0 && mon_ustdve !=0 && tasa !=0){
-	//Calculos de datos--------------------------------------
-	var total_tranf = 0; 	//Total Moneda a Calcular
-	var usdt_req = 0;		 //USDT requeridos
-	var mon_req = 0; //Requeridos (Moneda)
-	//COP
-	if(gl_selmon_a == 0){
-	 	if(gl_selmon_b == 1){	//ARS
-			//return alert("No disponible!.");
-		}
-		else if(gl_selmon_b == 2){	//VES
-			total_tranf = moneda/tasa;
-			usdt_req = total_tranf/mon_ustdve;
-			mon_req = mon_ustdve*usdt_req //Requeridos (Moneda)
-		}
-	}
-
-	//ARS
-	else if(gl_selmon_a == 1){
-		if(gl_selmon_b == 0){	//COP
-			total_tranf = moneda*tasa;
-			usdt_req = total_tranf/mon_ustdve;
-			mon_req = mon_ustd*usdt_req; //Requeridos (Moneda)
+		//Calculos de datos--------------------------------------
+		var total_tranf = 0; 	//Total Moneda a Calcular
+		var usdt_req = 0;		 //USDT requeridos
+		var mon_req = 0; //Requeridos (Moneda)
+		//COP
+		if(gl_selmon_a == 0){
+		 	if(gl_selmon_b == 1){	//ARS
+				//return alert("No disponible!.");
+			}
+			else if(gl_selmon_b == 2){	//VES
+				total_tranf = moneda/tasa;
+				usdt_req = total_tranf/mon_ustdve;
+				mon_req = mon_ustdve*usdt_req //Requeridos (Moneda)
+			}
 		}
 
-		else if(gl_selmon_b == 2){	//VES
-			total_tranf = moneda*tasa;
-			usdt_req = total_tranf/mon_ustdve;
-			mon_req = mon_ustd*usdt_req; //Requeridos (Moneda)
-		}
-	}
+		//ARS
+		else if(gl_selmon_a == 1){
+			if(gl_selmon_b == 0){	//COP
+				total_tranf = moneda*tasa;
+				usdt_req = total_tranf/mon_ustdve;
+				mon_req = mon_ustd*usdt_req; //Requeridos (Moneda)
+			}
 
-	//VES
-	else if(gl_selmon_a == 2){
-		if(gl_selmon_b == 0){	//COP
-			//return alert("No disponible!.");
+			else if(gl_selmon_b == 2){	//VES
+				total_tranf = moneda*tasa;
+				usdt_req = total_tranf/mon_ustdve;
+				mon_req = mon_ustd*usdt_req; //Requeridos (Moneda)
+			}
 		}
-		else if(gl_selmon_b == 1){	//ARS
-			//return alert("No disponible!.");
+
+		//VES
+		else if(gl_selmon_a == 2){
+			if(gl_selmon_b == 0){	//COP
+				//return alert("No disponible!.");
+			}
+			else if(gl_selmon_b == 1){	//ARS
+				//return alert("No disponible!.");
+			}
 		}
-	}
 		var ganancia = moneda-mon_req 			//Ganancia
 
 		//Reinici los valores------------------------------------
