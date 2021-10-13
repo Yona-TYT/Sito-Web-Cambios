@@ -27,10 +27,20 @@ function comenzar(evento) {
 	console.log(" Aqui " );
 	var siz = gl_trasn_datos.sel_simbd.length;
 	for (var j = 0; j < siz; j++) {
-		var vlu = new Array();
+		var vlu_a = new Array();
+		var vlu_b = new Array();
+		var vlu_c = new Array();
+		var vlu_d = new Array();
 		for (var i = 0; i < siz; i++) {
-			vlu[i] = 0;
-			gl_trasn_datos.sel_tasa[j] = vlu;
+			vlu_a[i] = 0;
+			vlu_b[i] = 0;
+			vlu_c[i] = 0;
+			vlu_d[i] = 0;
+			gl_trasn_datos.sel_tasa[j] = vlu_a;
+			gl_trasn_datos.moneda[j] = vlu_b;
+			gl_trasn_datos.mon_ustd[j] = vlu_c;
+			gl_trasn_datos.mon_ustdve[j] = vlu_d;
+
 		}
 	}
 
@@ -200,8 +210,21 @@ function obtener_temp(evento) {
 		selec_change_mo();
 
 		var input = document.getElementById("tasa_rt");
-		var valor = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b])?parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]):0;
-		input.value = valor;
+		input.value = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]);
+		 
+		//Se inician los inputs ESCRITURA ---------------------------------------
+		var input_a = document.getElementById("inputrt10");
+		var input_b = document.getElementById("inputrt11");
+		var input_c = document.getElementById("inputrt12");
+
+
+
+		input_a.value = gl_trasn_datos.moneda[gl_selmon_a][gl_selmon_b];
+		input_b.value = gl_trasn_datos.mon_ustd[gl_selmon_a][gl_selmon_b];
+		input_c.value = gl_trasn_datos.mon_ustdve[gl_selmon_a][gl_selmon_b];
+
+
+
 
 		//console.log(""+gl_trasn_datos.save_id+" index");
 		mostrar_datos(gl_curr_optsel);

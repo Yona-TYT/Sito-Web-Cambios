@@ -54,6 +54,8 @@ function selec_change_mo(){
 	gl_selmon_a = inx_a;
 	gl_selmon_b = inx_b;
 
+	if(gl_selmon_b == 3) return null;
+
 	var inp_nam_a = document.getElementById("inputrt00");
 	var inp_nam_b = document.getElementById("inputrt01");
 	var inp_nam_c = document.getElementById("inputrt05");
@@ -82,6 +84,21 @@ function selec_change_mo(){
 	cv_input.setAttribute("step", ""+get_step(val)+"");
 	cv_input.value = val;
 
+
+	//Iniciamos los inputs ESCRITURA ---------------------------------------
+	var input_a = document.getElementById("inputrt10");
+	var input_b = document.getElementById("inputrt11");
+	var input_c = document.getElementById("inputrt12");
+
+	var moneda = gl_trasn_datos.moneda[gl_selmon_a][gl_selmon_b];
+	var mon_ustd = gl_trasn_datos.mon_ustd[gl_selmon_a][gl_selmon_b];
+	var mon_ustdve = gl_trasn_datos.mon_ustdve[gl_selmon_a][gl_selmon_b];
+
+	input_a.value = parseFloat(moneda)?parseFloat(moneda):0;
+	input_b.value = parseFloat(mon_ustd)?parseFloat(mon_ustd):0;
+	input_c.value = parseFloat(mon_ustdve)?parseFloat(mon_ustdve):0;
+
+
 	get_trans_datos();
 }
 
@@ -90,6 +107,7 @@ var gl_trasn_datos = new trasn_datos();
 var gl_trasn_save = new trasn_save();
 
 function get_trans_datos(){
+	if(gl_selmon_b == 3) return null;
 	//Iniciar areglos
 	var tasa = gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b];
 	var simbd_a = gl_trasn_datos.sel_simbd[gl_selmon_a];
@@ -97,9 +115,9 @@ function get_trans_datos(){
 	var simbd_b = gl_trasn_datos.sel_simbd[gl_selmon_b];
 	var simbi_b = gl_trasn_datos.sel_simbi[gl_selmon_b];
 
-	var moneda = (gl_trasn_datos.moneda[gl_selmon_a]==null?0:gl_trasn_datos.moneda[gl_selmon_a]);
-	var mon_ustd = (gl_trasn_datos.mon_ustd[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustd[gl_selmon_a]);
-	var mon_ustdve = (gl_trasn_datos.mon_ustdve[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustdve[gl_selmon_a]);
+	var moneda = 0;
+	var mon_ustd = 0;
+	var mon_ustdve = 0;
 
 	//Revisa el cuadro de tasa
 	var tas_input = document.getElementById("tasa_rt");
@@ -107,7 +125,6 @@ function get_trans_datos(){
 		tasa = parseFloat(tas_input.value)?parseFloat(tas_input.value):0;
 		gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b] = tasa;
 	}	
-
 
 	//Obtenemos los inputs ESCRITURA ---------------------------------------
 	var input_a = document.getElementById("inputrt10");
@@ -119,9 +136,12 @@ function get_trans_datos(){
 	var val_c = parseFloat(input_c.value)?parseFloat(input_c.value):0;
 
 	//Guarda los valores
-	gl_trasn_datos.moneda[gl_selmon_a] = val_a;
-	gl_trasn_datos.mon_ustd[gl_selmon_a] = val_b;
-	gl_trasn_datos.mon_ustdve[gl_selmon_a] = val_c;
+	gl_trasn_datos.moneda[gl_selmon_a][gl_selmon_b] = val_a;
+	gl_trasn_datos.mon_ustd[gl_selmon_a][gl_selmon_b] = val_b;
+	gl_trasn_datos.mon_ustdve[gl_selmon_a][gl_selmon_b] = val_c;
+
+
+	//console.log(" Input: "+ val_a+"SAVE: "+gl_trasn_datos.moneda[gl_selmon_a][gl_selmon_b]+" b: "+gl_selmon_b);
 
 	add_temp(gl_trasn_datos);
 	
@@ -147,7 +167,7 @@ function get_trans_datos(){
 		}
 
 		else if(gl_selmon_b == 2){
-			total_ves = moneda*tasa;
+			total_ves = moneda/tasa;
 		}
 	}
 
@@ -230,31 +250,31 @@ function guardar_trans_datos(){
 		//console.log(" Tasa: "+ tasa+" a: "+gl_selmon_a+" b: "+gl_selmon_b);
 		//COP
 		if(gl_selmon_a == 0){
-		 	if(gl_selmon_b == 1){
+		 	if(gl_selmon_b == 1){	//ARS
 				return alert("No disponible!.");
 			}
-			else if(gl_selmon_b == 2){
+			else if(gl_selmon_b == 2){	//VES
 				total_ves = moneda/tasa;
 			}
 		}
 
 		//ARS
 		else if(gl_selmon_a == 1){
-			if(gl_selmon_b == 0){
-				return alert("No disponible!.");
+			if(gl_selmon_b == 0){	//COP
+				moneda*tasa;
 			}
 
-			else if(gl_selmon_b == 2){
+			else if(gl_selmon_b == 2){	//VES
 				total_ves = moneda*tasa;
 			}
 		}
 
 		//VES
 		else if(gl_selmon_a == 2){
-			if(gl_selmon_b == 0){
+			if(gl_selmon_b == 0){	//COP
 				return alert("No disponible!.");
 			}
-			else if(gl_selmon_b == 1){
+			else if(gl_selmon_b == 1){	//ARS
 				return alert("No disponible!.");
 			}
 		}
