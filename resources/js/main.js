@@ -250,7 +250,7 @@ function remplace_test(num) {
 	if(num == "")	
 		num = num.replace(/($)/g, "1.00");
 	else{
-		num = num.replace(/($)/, ".00");
+		num = num.replace(/($)/, ".");
 	}
 	return num;
 }
