@@ -216,7 +216,7 @@ function trasn_datos() {
 	this.sel_money = new Array();
 	this.sel_tasa =  new Array();
 	this.sel_simbd = ["COP", "ARS", "VES"];
-	this.sel_simbi = ["$", "$", "Bs"];
+	this.sel_simbi = ["$", "$", ""];
 
 	this.moneda = new Array();
 	this.mon_ustd = new Array();
@@ -237,8 +237,11 @@ function trasn_save() {
 	this.fecha = new Array();
 	this.hora = new Array();
 
-	this.simbd = new Array();
-	this.simbi = new Array();
+	this.simbd_a = new Array();
+	this.simbi_a = new Array();
+
+	this.simbd_b = new Array();
+	this.simbi_b = new Array();
 
 
 	this.tasa = new Array();

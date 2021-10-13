@@ -225,14 +225,22 @@ function mostrar_input() {
 	return null
 }
 
-function ocultar_input()
+function ocultar_input(otros = false)
 {
 	var current_input = document.activeElement;
 	var current_id_name = current_input.id;
 	var input_old = current_element;
 
-	el_selec();
-	if(input_old){
+	var result = true;
+	if(!otros){				//Otros inputs distintos a los de ingresar valores numericos
+		try {
+			el_selec(current_id_name);
+		}
+		catch (err) {
+			result = false;
+		}
+	}
+	if(input_old && result){
 		var id_name_old = input_old.id;
 		var id_mask_old = id_name_old.replace("input", "text_mask"); //remplaza  palabaras en cadenas de texto
 		var mask_old = document.getElementById(id_mask_old);

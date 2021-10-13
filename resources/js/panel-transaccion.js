@@ -54,12 +54,23 @@ function selec_change_mo(){
 	gl_selmon_a = inx_a;
 	gl_selmon_b = inx_b;
 
+	var inp_nam_a = document.getElementById("inputrt00");
+	var inp_nam_b = document.getElementById("inputrt01");
+	var inp_nam_c = document.getElementById("inputrt05");
+
+	var simb_a = gl_trasn_datos.sel_simbd[gl_selmon_a];
+	if(simb_a){
+		inp_nam_a.value = ""+simb_a+"";
+		inp_nam_b.value = ""+simb_a+"/USDT";
+		inp_nam_c.value = ""+simb_a+" Requeridos";
+	}
+
 	var inp_nam_a = document.getElementById("inputrt02");
 	var inp_nam_b = document.getElementById("inputrt04");
-	var simb = gl_trasn_datos.sel_simbd[gl_selmon_b];
-	if(simb){
-		inp_nam_a.value = ""+simb+"/USDT";
-		inp_nam_b.value = "Total "+simb;
+	var simb_b = gl_trasn_datos.sel_simbd[gl_selmon_b];
+	if(simb_b){
+		inp_nam_a.value = ""+simb_b+"/USDT";
+		inp_nam_b.value = "Total "+simb_b;
 	}
 
 	var val = gl_trasn_datos.sel_tasa[inx_a][inx_b];
@@ -200,8 +211,10 @@ function resultado_conver(){
 function guardar_trans_datos(){
 	//Iniciar areglos
 	var tasa = gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b];
-	var simbd = gl_trasn_datos.sel_simbd[gl_selmon_a];
-	var simbi = gl_trasn_datos.sel_simbi[gl_selmon_a];
+	var simbd_a = gl_trasn_datos.sel_simbd[gl_selmon_a];
+	var simbi_a = gl_trasn_datos.sel_simbi[gl_selmon_a];
+	var simbd_b = gl_trasn_datos.sel_simbd[gl_selmon_b];
+	var simbi_b = gl_trasn_datos.sel_simbi[gl_selmon_b];
 
 	var moneda = (gl_trasn_datos.moneda[gl_selmon_a]==null?0:gl_trasn_datos.moneda[gl_selmon_a]);
 	var mon_ustd = (gl_trasn_datos.mon_ustd[gl_selmon_a]==null?0:gl_trasn_datos.mon_ustd[gl_selmon_a]);
@@ -278,8 +291,10 @@ function guardar_trans_datos(){
 		var index = gl_trasn_datos.index;
 
 		//Guarda los datos de transferencia----------------------------------------
-		gl_trasn_save.simbd[index] = simbd;
-		gl_trasn_save.simbi[index] = simbi;
+		gl_trasn_save.simbd_a[index] = simbd_a;
+		gl_trasn_save.simbi_a[index] = simbi_a;
+		gl_trasn_save.simbd_b[index] = simbd_b;
+		gl_trasn_save.simbi_b[index] = simbi_b;
 		gl_trasn_save.tasa[index] = tasa;
 		gl_trasn_save.moneda[index] = moneda;
 		gl_trasn_save.mon_ustd[index] = mon_ustd;
@@ -313,7 +328,7 @@ function get_dia_ganancia(){
 	var index = gl_trasn_datos.index;
 	for (var j = 0; j <= index; j++) {
 		var selc_simb = gl_trasn_datos.sel_simbd[gl_selmon_a];
-		var simbd = gl_trasn_save.simbd[j];
+		var simbd = gl_trasn_save.simbd_a[j];
 		var ganancia = gl_trasn_save.ganancia[j];
 		var estado = gl_trasn_save.estado[j];
 		if(!estado)estado="Realizada";

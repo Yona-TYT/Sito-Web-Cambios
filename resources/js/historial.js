@@ -52,32 +52,34 @@ function crear_historial(index) {
 	var hora = gl_hist_save.hora[index];
 	var fecha = gl_hist_save.fecha[index];
 
-	var simbd = gl_hist_save.simbd[index];
-	var simbi = gl_hist_save.simbi[index];
+	var simbd_a = gl_hist_save.simbd_a[index];
+	var simbi_a = gl_hist_save.simbi_a[index];
+	var simbd_b = gl_hist_save.simbd_b[index];
+	var simbi_b = gl_hist_save.simbi_b[index];
 
 	var tasa = gl_hist_save.tasa[index];
 	var moneda = gl_hist_save.moneda[index];
 	var mon_ustd = gl_hist_save.mon_ustd[index];
 	var mon_ustdve = gl_hist_save.mon_ustdve[index];
 
-	var total_ves = gl_hist_save.total_ves[index];
+	var total_mon = gl_hist_save.total_ves[index];
 	var usdt_req = gl_hist_save.usdt_req[index];
 	var mon_req = gl_hist_save.mon_req[index];
 	var ganancia = gl_hist_save.ganancia[index];
 
 	var estado = gl_hist_save.estado[index];
 		
-	if(selc_simb==simbd){
+	if(selc_simb==simbd_a){
 		var tx_tasa = "<li>Tasa: "+tasa+"</li>";
-		var tx_a = "<li>"+simbd+" Recibidos: "+get_mask("",moneda,"")+"</li>";
-		var tx_b = "<li>"+simbd+"/USTD : "+get_mask("",mon_ustd,"")+"</li>";
-		var tx_c = "<li>VES/USTD : "+get_mask("",mon_ustdve,"")+"</li>";
+		var tx_a = "<li>"+simbd_a+" Recibidos: "+get_mask("",moneda,"")+"</li>";
+		var tx_b = "<li>"+simbd_a+"/USTD : "+get_mask("",mon_ustd,"")+"</li>";
+		var tx_c = "<li>"+simbd_b+"/USTD : "+get_mask("",mon_ustdve,"")+"</li>";
 		var tx_d = "<li>USTD Requeridos : "+get_mask("",usdt_req,"")+"</li>";
-		var tx_e = "<li>Total VES : "+get_mask("",total_ves,"")+"</li>";
-		var tx_f = "<li>"+simbd+" Requeridos: "+get_mask("",mon_req,"")+"</li>";
+		var tx_e = "<li>Total "+simbd_b+": "+get_mask("",total_mon,"")+"</li>";
+		var tx_f = "<li>"+simbd_a+" Requeridos: "+get_mask("",mon_req,"")+"</li>";
 		var tx_g = "<li>Ganancia : "+get_mask("",ganancia,"")+"</li>";
 
-		var titulo =  "Transaccion de: ("+get_mask(simbi,moneda,"("+simbd+")")+" / "+get_mask("", total_ves, "VES")+") Fecha:("+fecha+") Hora:("+hora+") ";
+		var titulo =  "Transaccion de: ("+get_mask(simbi_a,moneda,"("+simbd_a+")")+" / "+get_mask("", total_mon, ""+simbd_b+"")+") Fecha:("+fecha+") Hora:("+hora+") ";
 
 		var buttm = "<button type='button' onclick='button_detalles("+index+");'>Detalles</button>";
 
