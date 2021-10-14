@@ -15,11 +15,14 @@ function check_windows_siz() {
 		menu_list.setAttribute("class","");
 		menu_butt.setAttribute("class","element_style_hidden");	
 		if(!gl_mobil) {
+			var selec_b = document.getElementById("selc_mone_b");
+			selec_b.options[3].selected=true;		//Forza a selecionar el valor vacio
+
 			//console.log(+ancho+"  " +font_siz);
 			objref.style.setProperty("--alig-text", 'left');
 			objref.style.setProperty("--cel-siz", '35%');
 			gl_mobil = true;
-			int_trans();
+			create_table_rt();
 		}
 	}
 	else if(ancho >= 1024) {
@@ -27,10 +30,13 @@ function check_windows_siz() {
 		menu_list.setAttribute("class","element_style_hidden");
 		//console.log(+ancho+"  " +font_siz);
 		if(gl_mobil) {
+			var selec_b = document.getElementById("selc_mone_b");
+			selec_b.options[3].selected=true;		//Forza a selecionar el valor vacio
+
 			objref.style.setProperty("--alig-text", 'center');
 			objref.style.setProperty("--cel-siz", 'auto');
 			gl_mobil = false;
-			int_trans();
+			create_table_rt();
 		}
 	}
 }

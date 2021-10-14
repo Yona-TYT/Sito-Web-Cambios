@@ -68,7 +68,7 @@ function crear_historial(index) {
 	var ganancia = gl_hist_save.ganancia[index];
 
 	var estado = gl_hist_save.estado[index];
-		
+	//console.log("Index: "+index)
 	if(selc_simb==simbd_a){
 		var tx_tasa = "<li>Tasa: "+tasa+"</li>";
 		var tx_a = "<li>"+simbd_a+" Recibidos: "+get_mask("",moneda,"")+"</li>";

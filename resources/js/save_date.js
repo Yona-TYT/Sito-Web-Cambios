@@ -101,6 +101,7 @@ function obtener_selec(evento) {
 		//var id = resultado.id;
 		gl_hist_save = resultado.rtdatos;
 		var nr = gl_hist_save.index;
+		//console.log(nr+" nr");
 		for (var j = nr;  j >= 0; j--) {
 			//console.log(j+" j");
 			//var index = gl_trasn_save.savindex[j];

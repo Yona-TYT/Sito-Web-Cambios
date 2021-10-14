@@ -27,7 +27,7 @@
 	font-weight: bold;
 	font-size:var(--siz-text);
 
-	width: 99%;
+	width: 100%;
 	height:var(--all-height);
 
 	border-width: var(--all-bord);
@@ -277,7 +277,7 @@
 	height:var(--all-height);
 
 	background: rgba(55, 64, 145, 0.4);
-	overflow: scroll;
+	overflow: hidden;
 }
 
 .input_style_hidden {
@@ -465,6 +465,23 @@ tr, .fila_style:hover {
 	border-color: #fafafa;
 
 	background-color: #219f90;
+}
+
+button {
+	border-radius: 5px;
+
+	border-width: var(--butt-bord);
+	border-style: solid;
+	border-color: #b3b3b3;
+
+	margin:2px;
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-user-select: none;
 }
 
 .restaurar {
