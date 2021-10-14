@@ -221,7 +221,9 @@ function obtener_temp(evento) {
 
 
 		var input = document.getElementById("input_tasa");
+		var mask = document.getElementById("text_mask_tasa");
 		input.value = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]);
+		mask.value = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]);
 		 
 		//Se inician los inputs ESCRITURA ---------------------------------------
 		var input_a = document.getElementById("inputrt10");

@@ -129,7 +129,7 @@ function get_trans_datos() {
 		tasa = parseFloat(tas_input.value)?parseFloat(tas_input.value):0;
 		gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b] = tasa;
 	}	
-	mask.value = tasa;
+	//mask.value = tasa;
 	//Obtenemos los inputs ESCRITURA ---------------------------------------
 	var input_a = document.getElementById("inputrt10");
 	var input_b = document.getElementById("inputrt11");
