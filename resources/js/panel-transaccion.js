@@ -208,30 +208,6 @@ function get_trans_datos() {
 	mask_b.value = get_mask("", input_b.value, "("+simbd_a+"/USDT)");
 	mask_c.value = get_mask("", input_c.value, "("+simbd_b+"/USDT)");
 
-	//Se gestiona el tamaño del texto en los inputs
-	if(mask_a.value.length>15)
-		mask_a.style.fontSize = "80%";
-
-	if(mask_b.value.length>15)
-		mask_b.style.fontSize = "80%";
-
-	if(mask_c.value.length>15)
-		mask_c.style.fontSize = "80%";
-
-	if(input_d.value.length>15)
-		input_d.style.fontSize = "80%";
-
-	if(input_e.value.length>15)
-		input_e.style.fontSize = "80%";
-
-	if(input_f.value.length>15)
-		input_f.style.fontSize = "80%";
-
-	if(input_g.value.length>15)
-		input_g.style.fontSize = "80%";
-
-	//---------------------------------------------
-
 }
 
 function resultado_conver(){

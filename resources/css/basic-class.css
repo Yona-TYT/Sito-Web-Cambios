@@ -1,5 +1,6 @@
 :root {
 	--siz-text: 100%;
+	--siz-text2: 80%;
 	--all-height: 100%;
 	--inp-height: 20px;
 	--mask-height: 5%;
@@ -257,7 +258,7 @@
 
 	text-align: center;
 	font-weight: bold;
-	font-size:var(--siz-text);
+	font-size:var(--siz-text2);
 
 	color: #ffffff;
 	width: 100%;
@@ -323,7 +324,7 @@
 .input_style_edicion_td{
 	text-align: center;
 	font-weight: bold;
-	font-size: var(--siz-text);
+	font-size: var(--siz-text2);
 
 	color: #ffffff;
 	width: 100%;
@@ -412,7 +413,7 @@
 	color: #fffffe;
 	text-align:var(--alig-text);
 	font-weight: bold;
-	font-size:var(--siz-text);
+	font-size:var(--siz-text2);
 
 	width: 100%;
 	height:var(--inp-height);
