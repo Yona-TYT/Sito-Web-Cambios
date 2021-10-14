@@ -35,8 +35,6 @@ function int_trans(){
 }
 
 function selec_change_mo(){
-
-
 	var selec_a = document.getElementById("selc_mone_a");
 	var selec_b = document.getElementById("selc_mone_b");
 
@@ -86,7 +84,6 @@ function selec_change_mo(){
 	cv_input.setAttribute("step", ""+get_step(val)+"");
 	cv_input.value = val;
 
-
 	//Iniciamos los inputs ESCRITURA ---------------------------------------
 	var input_a = document.getElementById("inputrt10");
 	var input_b = document.getElementById("inputrt11");
@@ -100,14 +97,13 @@ function selec_change_mo(){
 	input_b.value = parseFloat(mon_ustd)?parseFloat(mon_ustd):0;
 	input_c.value = parseFloat(mon_ustdve)?parseFloat(mon_ustdve):0;
 
-
 	get_trans_datos();
 }
 
 var gl_trasn_datos = new trasn_datos();
 var gl_trasn_save = new trasn_save();
 
-function get_trans_datos(){
+function get_trans_datos() {
 	if(gl_selmon_b == 3) return null;
 	//Iniciar areglos
 	var tasa = gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b];
@@ -208,10 +204,33 @@ function get_trans_datos(){
 	var mask_b = document.getElementById("text_maskrt11");
 	var mask_c = document.getElementById("text_maskrt12");
 
-
 	mask_a.value = get_mask(simbi_a, input_a.value, "("+simbd_a+")");
 	mask_b.value = get_mask("", input_b.value, "("+simbd_a+"/USDT)");
 	mask_c.value = get_mask("", input_c.value, "("+simbd_b+"/USDT)");
+
+	//Se gestiona el tamaño del texto en los inputs
+	if(mask_a.value.length>15)
+		mask_a.style.fontSize = "80%";
+
+	if(mask_b.value.length>15)
+		mask_b.style.fontSize = "80%";
+
+	if(mask_c.value.length>15)
+		mask_c.style.fontSize = "80%";
+
+	if(input_d.value.length>15)
+		input_d.style.fontSize = "80%";
+
+	if(input_e.value.length>15)
+		input_e.style.fontSize = "80%";
+
+	if(input_f.value.length>15)
+		input_f.style.fontSize = "80%";
+
+	if(input_g.value.length>15)
+		input_g.style.fontSize = "80%";
+
+	//---------------------------------------------
 
 }
 
@@ -264,7 +283,6 @@ function guardar_trans_datos(){
 				mon_req = mon_ustdve*usdt_req //Requeridos (Moneda)
 			}
 		}
-
 		//ARS
 		else if(gl_selmon_a == 1){
 			if(gl_selmon_b == 0){	//COP
@@ -279,7 +297,6 @@ function guardar_trans_datos(){
 				mon_req = mon_ustd*usdt_req; //Requeridos (Moneda)
 			}
 		}
-
 		//VES
 		else if(gl_selmon_a == 2){
 			if(gl_selmon_b == 0){	//COP

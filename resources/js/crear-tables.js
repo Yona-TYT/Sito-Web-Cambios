@@ -227,9 +227,6 @@ function create_table(){
 	// appends <table> into <body>
 	//body.appendChild(tabla);
 
-	// modifica el atributo "border" de la tabla y lo fija a "2";
-	tabla.setAttribute("border", 2);
-
 	sect_table.appendChild(tabla);  ///innerHTML = tabla.innerHTML;
 
 	var r_margen = gl_listname.genmargen;
@@ -302,6 +299,10 @@ function create_table_rt(){
 				input.setAttribute("value", name_cel[siz_c]);
 				input.setAttribute("readonly", "");
 				input.setAttribute("class","colum_name_style");
+
+				if(input.value.length>10)
+					input.style.fontSize = "80%";
+
 				//celda.appendChild(input);
 				celda.innerHTML= input.outerHTML;
 			
@@ -398,9 +399,6 @@ function create_table_rt(){
 
 	// posicionamos el <tbody> debajo del elemento <table>
 	tabla.appendChild(tblBody);
-
-	// modifica el atributo "border" de la tabla y lo fija a "2";
-	tabla.setAttribute("border", 2);
 
 	sect_table.appendChild(tabla);  ///innerHTML = tabla.innerHTML;
 
