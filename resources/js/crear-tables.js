@@ -46,7 +46,7 @@ function create_table(){
 				//console.log(prdol+"  "+ total);
 
 				celda.setAttribute("id", "celd"+celda_id)
-				celda.setAttribute("class","celda_style_td");
+				celda.setAttribute("class","");
 
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
@@ -109,7 +109,7 @@ function create_table(){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celd"+celda_id)
-				celda.setAttribute("class","celda_style_td");
+				celda.setAttribute("class","");
 
 				// Creamos 2 elementos de entrada
 				var input = document.createElement("input");
@@ -143,7 +143,7 @@ function create_table(){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celd"+celda_id)
-				celda.setAttribute("class","celda_style_td");
+				celda.setAttribute("class","");
 
 				
 				if(i==0){
@@ -284,7 +284,7 @@ function create_table_rt(){
 				var celda = document.createElement("td");
 
 				celda.setAttribute("id", "celdrt"+celda_id)
-				celda.setAttribute("class","celda_style_td");
+				celda.setAttribute("class","");
 
 				var input = document.createElement("input");
 				input.setAttribute("id", "inputrt"+celda_id);

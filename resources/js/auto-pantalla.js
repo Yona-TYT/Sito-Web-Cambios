@@ -26,9 +26,11 @@ function check_windows_siz() {
 		menu_butt.setAttribute("class","");
 		menu_list.setAttribute("class","element_style_hidden");
 		//console.log(+ancho+"  " +font_siz);
-		objref.style.setProperty("--alig-text", 'center');
-		objref.style.setProperty("--cel-siz", 'auto');
-		gl_mobil = false;
-		int_trans();
+		if(gl_mobil) {
+			objref.style.setProperty("--alig-text", 'center');
+			objref.style.setProperty("--cel-siz", 'auto');
+			gl_mobil = false;
+			int_trans();
+		}
 	}
 }

@@ -12,7 +12,7 @@
 .cajas_style {
 
 	display:var(--caja-disp);
-	margin: 2px;
+
 }
 
 .table_style{
@@ -33,7 +33,7 @@
 	border-style: solid;
 	border-color: #fafafa;
 
-	margin: 15% auto;
+	margin: 2px;
 	background-color: rgba(33, 159, 144, 0.7);
 }
 
