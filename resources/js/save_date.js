@@ -210,6 +210,12 @@ function obtener_temp(evento) {
 
 		selec_change_mo();
 
+		var selec_a = document.getElementById("selc_mone_a");
+		var selec_b = document.getElementById("selc_mone_b");
+
+		selec_a.options[gl_trasn_datos.sel_mon_a].selected=true;
+		selec_b.options[gl_trasn_datos.sel_mon_b].selected=true;
+
 		var input = document.getElementById("input_tasa");
 		input.value = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]);
 		 

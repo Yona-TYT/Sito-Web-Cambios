@@ -67,6 +67,9 @@ function selec_change_mo(){
 
 	if(gl_selmon_b == 3) return null;
 
+	gl_trasn_datos.sel_mon_a = inx_a;
+	gl_trasn_datos.sel_mon_b = inx_b;
+
 	var inp_nam_a = document.getElementById("inputrt00");
 	var inp_nam_b = document.getElementById("inputrt01");
 	var inp_nam_c = document.getElementById("inputrt05");
