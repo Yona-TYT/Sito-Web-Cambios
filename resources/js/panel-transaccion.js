@@ -43,8 +43,10 @@ function selec_change_mo(){
 
 	for (var j = 0; j < gl_trasn_datos.sel_simbd.length; j++) {
 		if(j == inx_a){
-			if(j == inx_b)
+			if(j == inx_b){
 				selec_b.options[3].selected=true;
+				inx_b = 3;
+			}
 			selec_b.options[j].setAttribute("class", "input_style_hidden");
 		}
 		else
@@ -80,10 +82,6 @@ function selec_change_mo(){
 	input.setAttribute("step", ""+get_step(val)+"");
 	input.value = val;
 
-	var cv_input = document.getElementById("cv_tasa");
-	cv_input.setAttribute("step", ""+get_step(val)+"");
-	cv_input.value = val;
-
 	//Iniciamos los inputs ESCRITURA ---------------------------------------
 	var input_a = document.getElementById("inputrt10");
 	var input_b = document.getElementById("inputrt11");
@@ -104,7 +102,7 @@ var gl_trasn_datos = new trasn_datos();
 var gl_trasn_save = new trasn_save();
 
 function get_trans_datos() {
-	if(gl_selmon_b == 3) return null;
+	if(gl_selmon_b == 3) return alert("Tipo de Moneda Esata Vacio!.");
 	//Iniciar areglos
 	var tasa = gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b];
 	var simbd_a = gl_trasn_datos.sel_simbd[gl_selmon_a];
@@ -212,9 +210,11 @@ function get_trans_datos() {
 
 function resultado_conver(){
 	var selec = document.getElementById("sel_conver");
-	var tasa = document.getElementById("cv_tasa");
+	var tasa = document.getElementById("tasa_rt");
 	var input_a = document.getElementById("cv_input_a");
 	var input_b = document.getElementById("cv_input_b");
+
+	if(gl_selmon_b == 3) return alert("Tipo de Moneda Esata Vacio!.");
 
 	var num_a =  parseFloat(input_a.value)?parseFloat(input_a.value):0;
 	var num_b =  parseFloat(input_b.value)?parseFloat(input_b.value):0;
@@ -222,7 +222,7 @@ function resultado_conver(){
 
 
 	if(selec.value == "0"){
-		input_b.value = get_mask("",num_a/num_tasa,"Bsf");
+		input_b.value = get_mask("",num_a/num_tasa,"Bs");
 	}
 	if(selec.value == "1"){
 		input_b.value = get_mask("$",num_a*num_tasa,"");
