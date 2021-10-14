@@ -38,8 +38,8 @@ function addCommas(nStr,simbd,simbi){
 		return simbi+" "+ x1 + x2.replace(".",",") + " "+simbd;
 }
 
-function get_mask(simbi, numer,simbd){
-	numer = parseFloat(numer)? parseFloat(numer).toFixed(2) : parseFloat(0).toFixed(2);
+function get_mask(simbi, numer,simbd , fix = 2){
+	numer = parseFloat(numer)? parseFloat(numer).toFixed(fix) : parseFloat(0).toFixed(fix);
 	return addCommas(numer,simbd,simbi);
 }
 
@@ -68,11 +68,25 @@ function num_len(num){
 	return res;
 }
 function decim_len(num){
-	var val = num - Math.floor(num);
+	var val = (Math.log(num) * Math.LOG10E + 1 | 0)*(-1)
 	var txt = ""+num+"";
 
 	var text_list = txt.split('.')
 
+	if(text_list.length>0){
+		var test = text_list[1]
+		var dig = test?test.length:0;//(Math.log(n) * Math.LOG10E + 1 | 0)-1;
+		var res = "";
+		//console.log(" num: " +Math.max(dig, val)+"");
+		return Math.max(dig, val);
+	}
+	return 0;
+}
+function decim_len_tx(num){
+	var val = num - Math.floor(num);
+	var txt = ""+num+"";
+
+	var text_list = txt.split('.')
 
 	if(text_list.length>0){
 		var test = text_list[1]
@@ -83,7 +97,7 @@ function decim_len(num){
 			if(flag){
 				//console.log(" len" +test[j]+"");
 				if(test[j] && test[j] != '0'){
-					res += "1";	
+					//res += "0";	
 					flag = false;
 					continue;
 				}
@@ -92,7 +106,7 @@ function decim_len(num){
 			else
 				res += "0";
 		}
-			return res;
+		return res.replace(/($)/, "1");
 	}
 	return "0";
 }

@@ -104,7 +104,7 @@ function load_save_data(){
 	var tasa = gl_trasn_datos.sel_tasa[gl_selmon];
 	var simbd = gl_trasn_datos.sel_simbd[gl_selmon];
 	var simbi = gl_trasn_datos.sel_simbi[gl_selmon];
-	var input = document.getElementById("tasa_rt");
+	var input = document.getElementById("input_tasa");
 	input.value = tasa;
 
 	//Obtenemos los inputs ESCRITURA ---------------------------------------

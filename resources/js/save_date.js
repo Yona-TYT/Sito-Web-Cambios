@@ -210,7 +210,7 @@ function obtener_temp(evento) {
 
 		selec_change_mo();
 
-		var input = document.getElementById("tasa_rt");
+		var input = document.getElementById("input_tasa");
 		input.value = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]);
 		 
 		//Se inician los inputs ESCRITURA ---------------------------------------
@@ -236,6 +236,9 @@ function trasn_datos() {
 	this.sel_tasa =  new Array();
 	this.sel_simbd = ["COP", "ARS", "VES"];
 	this.sel_simbi = ["$", "$", ""];
+
+	this.sel_mon_a = 0;
+	this.sel_mon_b = 1;
 
 	this.moneda = new Array();
 	this.mon_ustd = new Array();

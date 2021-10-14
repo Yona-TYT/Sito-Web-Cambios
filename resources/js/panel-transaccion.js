@@ -3,27 +3,36 @@ var gl_selmon_b = 0;
 
 function int_trans(){
 	//Selecciona el tipo de moneda
-	var selec = document.getElementById("selc_mone_a");
-	selec.addEventListener("change", function(){
+	var sel_a = document.getElementById("selc_mone_a");
+	sel_a.addEventListener("change", function(){
 		selec_change_mo();
 		selec_fechas('selchisfec');
 
 	});
 
-	var selec = document.getElementById("selc_mone_b");
-	selec.addEventListener("change", function(){
+	var sel_b = document.getElementById("selc_mone_b");
+	sel_b.addEventListener("change", function(){
 		selec_change_mo();
 		selec_fechas('selchisfec');
 
 	});
 
-	var input = document.getElementById("tasa_rt");
+	var input = document.getElementById("input_tasa");
 	input.addEventListener("input", function(){
-		var input = document.getElementById("tasa_rt");
+		var input = document.getElementById("input_tasa");
+		var mask = document.getElementById("text_mask_tasa");
+
+		var tx = input.value
+		tx = tx.replace(/[0]($)/, "1");
+
+		//input.value = tx;
+
 		var valor = parseFloat(input.value)?parseFloat(input.value):0;
 		gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b] = valor;
 
-		//console.log(" len" +decim_len(valor)+"");	
+		mask.value = get_mask("", valor,"", decim_len(valor));
+
+		//console.log(" len: " +decim_len(valor)+" Tx: "+tx);	
 		input.setAttribute("step", ""+get_step(valor)+"");
 		//console.log(+input.value+"  " );
 		get_trans_datos();
@@ -78,7 +87,7 @@ function selec_change_mo(){
 	}
 
 	var val = gl_trasn_datos.sel_tasa[inx_a][inx_b];
-	var input = document.getElementById("tasa_rt");
+	var input = document.getElementById("input_tasa");
 	input.setAttribute("step", ""+get_step(val)+"");
 	input.value = val;
 
@@ -111,12 +120,13 @@ function get_trans_datos() {
 	var simbi_b = gl_trasn_datos.sel_simbi[gl_selmon_b];
 
 	//Revisa el cuadro de tasa
-	var tas_input = document.getElementById("tasa_rt");
+	var tas_input = document.getElementById("input_tasa");
+	var mask = document.getElementById("text_mask_tasa");
 	if(tasa==0){
 		tasa = parseFloat(tas_input.value)?parseFloat(tas_input.value):0;
 		gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b] = tasa;
 	}	
-
+	mask.value = tasa;
 	//Obtenemos los inputs ESCRITURA ---------------------------------------
 	var input_a = document.getElementById("inputrt10");
 	var input_b = document.getElementById("inputrt11");
@@ -210,7 +220,7 @@ function get_trans_datos() {
 
 function resultado_conver(){
 	var selec = document.getElementById("sel_conver");
-	var tasa = document.getElementById("tasa_rt");
+	var tasa = document.getElementById("input_tasa");
 	var input_a = document.getElementById("cv_input_a");
 	var input_b = document.getElementById("cv_input_b");
 
