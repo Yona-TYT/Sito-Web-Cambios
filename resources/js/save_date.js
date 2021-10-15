@@ -225,6 +225,13 @@ function obtener_temp(evento) {
 			else
 				selec_b.options[j].setAttribute("class", "");
 		}
+		var input = document.getElementById("input_tasa");
+		var mask = document.getElementById("text_mask_tasa");
+
+		var tasa = gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b];
+		input.value = tasa;
+		mask.value = get_mask("", tasa,"", decim_len(tasa));
+		input.setAttribute("step", ""+get_step(valor)+"");
 		 
 		//Se inician los inputs ESCRITURA ---------------------------------------
 		var input_a = document.getElementById("inputrt10");
