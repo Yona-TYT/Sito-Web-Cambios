@@ -218,12 +218,13 @@ function obtener_temp(evento) {
 		selec_a.options[gl_selmon_a].selected=true;
 		selec_b.options[gl_selmon_b].selected=true;
 
-
-
-		var input = document.getElementById("input_tasa");
-		var mask = document.getElementById("text_mask_tasa");
-		input.value = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]);
-		mask.value = parseFloat(gl_trasn_datos.sel_tasa[gl_selmon_a][gl_selmon_b]);
+		for (var j = 0; j < gl_trasn_datos.sel_simbd.length; j++) {
+			if(j == gl_selmon_a){
+				selec_b.options[j].setAttribute("class", "input_style_hidden");
+			}
+			else
+				selec_b.options[j].setAttribute("class", "");
+		}
 		 
 		//Se inician los inputs ESCRITURA ---------------------------------------
 		var input_a = document.getElementById("inputrt10");

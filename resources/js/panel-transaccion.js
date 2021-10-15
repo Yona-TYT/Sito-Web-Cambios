@@ -94,6 +94,10 @@ function selec_change_mo(){
 	input.setAttribute("step", ""+get_step(val)+"");
 	input.value = val;
 
+	var mask = document.getElementById("text_mask_tasa");
+	mask.value = get_mask("", val,"", decim_len(val));
+
+
 	//Iniciamos los inputs ESCRITURA ---------------------------------------
 	var input_a = document.getElementById("inputrt10");
 	var input_b = document.getElementById("inputrt11");
