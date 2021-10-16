@@ -243,7 +243,9 @@ function obtener_temp(evento) {
 		input_c.value = gl_trasn_datos.mon_ustdve[gl_selmon_a][gl_selmon_b];
 
 		//console.log(""+gl_trasn_datos.save_id+" index");
+		get_trans_datos();
 		mostrar_datos(gl_curr_optsel);
+
 	}	
 }
 
