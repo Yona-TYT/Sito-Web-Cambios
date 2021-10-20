@@ -206,9 +206,7 @@ function obtener_temp(evento) {
 		gl_trasn_datos = resultado.tmpdatos;
 		gl_curr_optsel = gl_trasn_datos.save_id;
 
-		//console.log("  Selc: "+ gl_trasn_datos.sel_tasa[0][0]);
-
-		selec_change_mo();
+		//console.log("  SelcA: "+ gl_trasn_datos.sel_mon_a+"  SelcB: "+ gl_trasn_datos.sel_mon_b);
 
 		var selec_a = document.getElementById("selc_mone_a");
 		var selec_b = document.getElementById("selc_mone_b");
@@ -225,6 +223,8 @@ function obtener_temp(evento) {
 			else
 				selec_b.options[j].setAttribute("class", "");
 		}
+
+		//alert("ggggggggggg");
 		var input = document.getElementById("input_tasa");
 		var mask = document.getElementById("text_mask_tasa");
 

@@ -62,10 +62,10 @@ function selec_change_mo(){
 			selec_b.options[j].setAttribute("class", "");
 	}
 
+	if(gl_selmon_b == 3) return null;
+
 	gl_selmon_a = inx_a;
 	gl_selmon_b = inx_b;
-
-	if(gl_selmon_b == 3) return null;
 
 	gl_trasn_datos.sel_mon_a = inx_a;
 	gl_trasn_datos.sel_mon_b = inx_b;
