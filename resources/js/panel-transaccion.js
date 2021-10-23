@@ -165,12 +165,12 @@ function get_trans_datos() {
 	//COP
 	if(gl_selmon_a == 0){
 	 	if(gl_selmon_b == 1){	//ARS
-			//return alert("No disponible!.");
+			return alert("No disponible!.");
 		}
 		else if(gl_selmon_b == 2){	//VES
 			total_tranf = moneda/tasa;
 			usdt_req = total_tranf/mon_ustdve;
-			mon_req = mon_ustdve*usdt_req //Requeridos (Moneda)
+			mon_req = mon_ustd*usdt_req //Requeridos (Moneda)
 		}
 	}
 
@@ -192,10 +192,10 @@ function get_trans_datos() {
 	//VES
 	else if(gl_selmon_a == 2){
 		if(gl_selmon_b == 0){	//COP
-			//return alert("No disponible!.");
+			return alert("No disponible!.");
 		}
 		else if(gl_selmon_b == 1){	//ARS
-			//return alert("No disponible!.");
+			return alert("No disponible!.");
 		}
 	}
 	//console.log(" Tasa: "+ tasa+" a: "+gl_selmon_a+" b: "+gl_selmon_b);
