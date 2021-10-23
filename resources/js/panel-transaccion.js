@@ -192,7 +192,9 @@ function get_trans_datos() {
 	//VES
 	else if(gl_selmon_a == 2){
 		if(gl_selmon_b == 0){	//COP
-			return alert("No disponible!.");
+			total_tranf = moneda*tasa;
+			usdt_req = total_tranf/mon_ustdve;
+			mon_req = mon_ustd*usdt_req //Requeridos (Moneda)
 		}
 		else if(gl_selmon_b == 1){	//ARS
 			return alert("No disponible!.");
