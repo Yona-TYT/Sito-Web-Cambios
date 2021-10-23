@@ -274,7 +274,7 @@ function guardar_trans_datos(){
 			else if(gl_selmon_b == 2){	//VES
 				total_tranf = moneda/tasa;
 				usdt_req = total_tranf/mon_ustdve;
-				mon_req = mon_ustdve*usdt_req //Requeridos (Moneda)
+				mon_req = mon_ustd*usdt_req //Requeridos (Moneda)
 			}
 		}
 		//ARS
