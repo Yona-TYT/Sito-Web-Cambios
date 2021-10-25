@@ -251,14 +251,14 @@ function resultado_conver(){
 		var res_gan = calc_ganancia(num_gan, result);
 
 		input_b.value = get_mask("",res_gan,"Bs");
-		input_c.value = get_mask("$",res_gan-result,"");
+		input_c.value = get_mask("$",(res_gan-result),"");
 	}
 	if(selec.value == "1"){
 		var result = num_a*num_tasa;
 		var res_gan = calc_ganancia(num_gan, result);
 
 		input_b.value = get_mask("$",res_gan,"");
-		input_c.value = get_mask("$",res_gan-result,"");
+		input_c.value = get_mask("$",(res_gan-result),"");
 	}
 }
 
