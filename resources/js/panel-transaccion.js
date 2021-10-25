@@ -233,19 +233,32 @@ function resultado_conver(){
 	var tasa = document.getElementById("input_tasa");
 	var input_a = document.getElementById("cv_input_a");
 	var input_b = document.getElementById("cv_input_b");
+	var input_c = document.getElementById("cv_input_c");
+	var gan = document.getElementById("cv_input_gan");
 
 	if(gl_selmon_b == 3) return alert("Tipo de Moneda Esata Vacio!.");
 
 	var num_a =  parseFloat(input_a.value)?parseFloat(input_a.value):0;
 	var num_b =  parseFloat(input_b.value)?parseFloat(input_b.value):0;
 	var num_tasa =  parseFloat(tasa.value)?parseFloat(tasa.value):0;
+	var num_gan =  parseFloat(gan.value)?parseFloat(gan.value):0;
 
 
+
+	console.log("Result: "+ num_a);
 	if(selec.value == "0"){
-		input_b.value = get_mask("",num_a/num_tasa,"Bs");
+		var result = num_a/num_tasa;
+		var res_gan = calc_ganancia(num_gan, result);
+
+		input_b.value = get_mask("",res_gan,"Bs");
+		input_c.value = get_mask("$",res_gan-result,"");
 	}
 	if(selec.value == "1"){
-		input_b.value = get_mask("$",num_a*num_tasa,"");
+		var result = num_a*num_tasa;
+		var res_gan = calc_ganancia(num_gan, result);
+
+		input_b.value = get_mask("$",res_gan,"");
+		input_c.value = get_mask("$",res_gan-result,"");
 	}
 }
 

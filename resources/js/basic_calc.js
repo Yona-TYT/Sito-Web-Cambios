@@ -13,6 +13,20 @@ function calc_dolarporunidad(margen, margenunidad, precio)
 }
 
 
+function calc_ganancia(margen, valor)
+{
+	var a =  parseFloat(margen)? parseFloat(margen):0;
+	var b =  parseFloat(valor)? parseFloat(valor):0;	
+
+
+	var calc = (a*b*0.01)+b;
+	//add_message(""+a+"---"+b+"---"+(c)+"");
+	var result = parseFloat(calc)? parseFloat(calc) : 0;
+
+	return calc;
+}
+
+
 function calc_bolivarprecio(bolivares, dolar)
 {
 	var a =  parseFloat(bolivares)?parseFloat(bolivares):0;
